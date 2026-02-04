@@ -1,5 +1,20 @@
-import type { NavItemsProps, ServiceCardProps, StatsProps } from "../types/index";
-import { UtensilsCrossed, Dumbbell, PartyPopper } from "lucide-react";
+import type { 
+    NavItemsProps, 
+    ServiceCardProps,
+    StatsProps, 
+    featuresProps,
+    planProps 
+} from "../types/index";
+import { 
+    UtensilsCrossed, 
+    Dumbbell, 
+    PartyPopper,
+    Users,
+    Target,
+    Clock,
+    Calendar,
+    Award
+} from "lucide-react";
 
 export const navItems: NavItemsProps[] = [
         // { pageName: "Home", pathname: "/" },
@@ -75,4 +90,75 @@ export const testimonials = [
         text: "The culinary experience here rivals the best restaurants in the city. The fusion of flavors, impeccable service, and elegant ambiance create a truly exceptional dining destination."
     }
 ];
+
+
+export const features: featuresProps[] = [
+    {
+      icon: Dumbbell,
+      title: "Cardio & Weights",
+      image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&q=80"
+    },
+    {
+      icon: Users,
+      title: "Personal Training",
+      image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&q=80"
+    },
+    {
+      icon: Target,
+      title: "Strength Training",
+      image: "https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=800&q=80"
+    },
+    {
+      icon: Clock,
+      title: "Walk-in Sessions",
+      image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80"
+    },
+    {
+      icon: Calendar,
+      title: "Group Classes",
+      image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80"
+    },
+    {
+      icon: Award,
+      title: "Premium Memberships",
+      image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80"
+    }
+  ];
+
+export const plans: planProps[] = [
+    {
+      name: "Basic",
+        price: 29,
+        duration: "month",
+        features: [
+        "Access to all gym equipment",
+        "1 personal training session",
+        "Access to group classes"
+      ]
+    },
+    {
+      name: "Standard",
+        price: 49,
+        duration: "month",
+        features: [
+        "Access to all gym equipment",
+        "4 personal training sessions",
+        "Access to group classes",
+        "1 guest pass per month"
+      ],
+      is_popular: true
+    },
+    {
+      name: "Premium",
+        price: 79,
+        duration: "month",
+        features: [
+        "Unlimited access to all gym equipment",
+        "8 personal training sessions",
+        "Access to group classes",
+        "5 guest passes per month",
+        "Free merchandise pack"
+      ]
+    }
+  ];
 

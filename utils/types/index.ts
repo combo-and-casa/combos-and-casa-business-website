@@ -26,3 +26,23 @@ export interface TestimonialProps {
     image: string;
     text: string;
 }
+
+export interface featuresProps {
+    icon: React.ElementType;
+    title: string;
+    image: string;
+}
+
+export interface planProps {
+    name: string;
+    price: number;
+    duration: string;
+    features: string[];
+    is_popular?: boolean;
+}
+
+export interface PlanCardProps {
+    plan: planProps;
+    onSelect: (plan: planProps) => void;
+    index: number;
+}

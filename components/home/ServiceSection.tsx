@@ -7,7 +7,7 @@ import { services } from "../../utils/constents/index";
 export default function ServicesSection() {
 
   return (
-    <section id="services" className="py-24 md:py-32 px-6 lg:px-8 bg-[#0A0A0A]">
+    <section id="services" className="pt-24 pb-10 md:pt-32 md:pb-20 px-6 lg:px-8 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
