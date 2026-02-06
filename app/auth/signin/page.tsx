@@ -92,3 +92,13 @@
 //         </div>
 //     );
 // }
+
+'use client';
+
+export default function SignInPage() {
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A]">
+            <h2 className="text-2xl font-bold mb-6 text-center">Sign In / Sign Up Coming Soon!</h2>
+        </div>
+    );
+}
