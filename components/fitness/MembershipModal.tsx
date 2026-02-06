@@ -94,29 +94,29 @@ export default function MembershipModal({ plan, onClose, onSuccess }: { plan: an
               <div className="space-y-4 mb-6">
                 <RadioGroup defaultValue="">
                   <div className="flex items-center gap-2">
-                      <RadioGroupItem value="mtn-mobile-money" id="mtn-mobile-money" />
-                      <label className=" flex items-center gap-2 text-sm text-white/60 mb-2">
-                        MTN Mobile Money
+                      <RadioGroupItem value="momo" id="momo" />
+                      <label className=" flex items-center gap-2 text-sm text-white/60">
+                        Mobile Money
                         <CreditCard className="w-4 h-4 text-white/40" />
                       </label>    
                   </div>
-                  <div className="flex items-center gap-2">
+                  {/* <div className="flex items-center gap-2">
                       <RadioGroupItem value="telecel-cash" id="telecel-cash" />
-                        <label className=" flex items-center gap-2 text-sm text-white/60 mb-2">
+                        <label className=" flex items-center gap-2 text-sm text-white/60">
                           Telecel Cash
                           <CreditCard className="w-4 h-4 text-white/40" />
                         </label>  
                   </div>
                   <div className="flex items-center gap-2">
                       <RadioGroupItem value="at-cash" id="at-cash" />
-                        <label className=" flex items-center gap-2 text-sm text-white/60 mb-2">
+                        <label className=" flex items-center gap-2 text-sm text-white/60">
                           AT Cash
                           <CreditCard className="w-4 h-4 text-white/40" />
                         </label>
-                  </div>
+                  </div> */}
                   <div className="flex items-center gap-2">
                       <RadioGroupItem value="card" id="card" />
-                        <label className=" flex items-center gap-2 text-sm text-white/60 mb-2">
+                        <label className=" flex items-center gap-2 text-sm text-white/60">
                           Debit/Credit Card
                           <CreditCard className="w-4 h-4 text-white/40" />
                         </label>

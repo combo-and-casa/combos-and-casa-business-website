@@ -86,7 +86,80 @@ export default function Restaurant() {
             price: 4.99,
             category: "non-alcoholic",
             image_url: "https://images.unsplash.com/photo-1523677011781-c91d1bbe2f9d?w=400"
-          }
+          },
+
+          {
+            id: "7",
+            name: "Bruschetta",
+            description: "Grilled bread topped with fresh tomatoes and basil",
+            price: 10.99,
+            category: "starters",
+            image_url: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+            dietary_tags: ["vegetarian"]
+          },
+          {
+            id: "8",
+            name: "Ribeye Steak",
+            description: "Juicy ribeye steak cooked to perfection",
+            price: 34.99,
+            category: "mains",
+            image_url: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400",
+            dietary_tags: []
+          },
+          {
+            id: "9",
+            name: "Tiramisu",
+            description: "Classic Italian dessert with coffee and mascarpone",
+            price: 8.99,
+            category: "desserts",
+            image_url: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400",
+            dietary_tags: ["vegetarian"]
+          },
+          {
+            id: "10",
+            name: "Old Fashioned",
+            description: "Whiskey cocktail with bitters and a twist of orange",
+            price: 12.99,
+            category: "cocktails",
+            image_url: "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=400" ,
+            dietary_tags: []
+          },
+          {
+            id: "11",
+            name: "Chardonnay",
+            description: "Crisp white wine with notes of apple and oak",
+            price: 39.99,
+            category: "wines",
+            image_url: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400",
+            dietary_tags: []
+          },
+          {
+            id: "12",
+            name: "Virgin Pina Colada",
+            description: "Tropical blend of pineapple and coconut",
+            price: 5.99,
+            category: "non-alcoholic",
+            image_url: "https://images.unsplash.com/photo-1523677011781-c91d1bbe2f9d?w=400",
+            dietary_tags: []
+          },
+          {
+            id: "13",
+            name: "Caprese Salad",
+            description: "Fresh mozzarella, tomatoes, and basil drizzled with balsamic glaze",
+            price: 11.99,
+            category: "starters",
+            image_url: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400",
+            dietary_tags: ["vegetarian", "gluten-free"]
+          },
+          {
+            id: "14",
+            name: "Lobster Ravioli",
+            description: "Homemade ravioli stuffed with lobster and ricotta",
+            price: 29.99,
+            category: "mains",
+            image_url: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400",
+            dietary_tags: []
+          },
         ];
         setMenuItems(mockItems);
         setIsLoading(false);
@@ -308,7 +381,7 @@ export default function Restaurant() {
               </div>
 
               <Link
-                href="/Cart"
+                href="/cart"
                 className="block w-full py-4 gradient-gold text-black font-semibold rounded-xl text-center hover:scale-[1.02] transition-transform"
               >
                 Proceed to Checkout

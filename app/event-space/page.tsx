@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import EventGallery from "@/components/events/EventGallery";
 import BookingModal from "@/components/events/BookingModal";
+import Image from "next/image";
 
 const AboutCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -99,17 +100,20 @@ export default function Events() {
     {
       name: "Grand Ballroom",
       capacity: "200-300 guests",
-      features: ["Premium sound system", "LED lighting", "Stage setup", "Full bar"]
+      features: ["Premium sound system", "LED lighting", "Stage setup", "Full bar"],
+      image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80"
     },
     {
       name: "Rooftop Terrace",
       capacity: "100-150 guests",
-      features: ["City views", "Outdoor bar", "Lounge seating", "Fire pits"]
+      features: ["City views", "Outdoor bar", "Lounge seating", "Fire pits"],
+      image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80"
     },
     {
       name: "Private Dining",
       capacity: "20-40 guests",
-      features: ["Chef's table", "Wine cellar", "Intimate setting", "Custom menu"]
+      features: ["Chef's table", "Wine cellar", "Intimate setting", "Custom menu"],
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
     }
   ];
 
@@ -211,7 +215,7 @@ export default function Events() {
                 The Ultimate Setting for <span className="text-[#D4AF37]">Extraordinary Celebrations</span>
               </h2>
               <p className="text-white/70 text-lg leading-relaxed mb-6">
-                VENUE isn&apos;t just another event space; it is a place where lifelong memories are created. 
+                COMBOS & CASA EVENT SPACE isn&apos;t just another event space; it is a place where lifelong memories are created. 
                 Our facilities seamlessly blend nature with sophistication, offering versatile spaces equipped 
                 with cutting-edge amenities.
               </p>
@@ -243,20 +247,31 @@ export default function Events() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <motion.div
+             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5"
+              className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
-              <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
-                01
+              <div className="relative h-80">
+                <Image
+                  src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80"
+                  alt="Versatile spaces"
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
+                    01
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">Versatile Indoor & Outdoor Spaces</h3>
+                  <p className="text-white/80 leading-relaxed">
+                    Our picturesque spaces offer flexible layouts for intimate gatherings or grand celebrations.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-3">Versatile Indoor & Outdoor Spaces</h3>
-              <p className="text-white/60 leading-relaxed">
-                Our picturesque spaces offer flexible layouts for intimate gatherings or grand celebrations. 
-                State-of-the-art facilities meet your every need.
-              </p>
             </motion.div>
 
             <motion.div
@@ -264,16 +279,27 @@ export default function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5"
+              className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
-              <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
-                02
+              <div className="relative h-80">
+                <Image
+                  src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80"
+                  alt="White-glove service"
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
+                    02
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">White-Glove Service</h3>
+                  <p className="text-white/80 leading-relaxed">
+                    Our trained staff anticipate every need and handle the smallest details.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-3">White-Glove Service</h3>
-              <p className="text-white/60 leading-relaxed">
-                Our trained staff escort guests from arrival to farewell, anticipate every need, 
-                and handle the smallest details so hosts can relax and enjoy.
-              </p>
             </motion.div>
 
             <motion.div
@@ -281,33 +307,55 @@ export default function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5"
+              className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
-              <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
-                03
+              <div className="relative h-80">
+                <Image
+                  src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80"
+                  alt="Private suites"
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
+                    03
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">Private Hospitality Suites</h3>
+                  <p className="text-white/80 leading-relaxed">
+                    Exclusive lounges with en suite bathrooms and dressing spaces.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-3">Private Hospitality Suites</h3>
-              <p className="text-white/60 leading-relaxed">
-                Hosts and VIP guests enjoy exclusive lounges with en suite bathrooms, seating areas, 
-                and dressing spaces for ultimate comfort.
-              </p>
             </motion.div>
 
-            <motion.div
+             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5"
+              className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
-              <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
-                04
+              <div className="relative h-80">
+                <Image
+                  src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800&q=80"
+                  alt="Luxury interiors"
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
+                    04
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">Luxury Interiors & Outdoor Elegance</h3>
+                  <p className="text-white/80 leading-relaxed">
+                    Crystal chandeliers and landscaped gardens create a fairytale setting.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-3">Luxury Interiors & Outdoor Elegance</h3>
-              <p className="text-white/60 leading-relaxed">
-                High ceilings decorated with crystal chandeliers and meticulously landscaped gardens 
-                create a fairytale setting for your celebration.
-              </p>
             </motion.div>
 
             <motion.div
@@ -315,16 +363,27 @@ export default function Events() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5"
+              className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
-              <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
-                05
+              <div className="relative h-80">
+                <Image
+                  src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=800&q=80"
+                  alt="Infrastructure"
+                  width={400}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                  <div className="w-12 h-12 rounded-xl gradient-gold flex items-center justify-center mb-4 text-black font-bold text-2xl">
+                    05
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">Unrivaled Infrastructure</h3>
+                  <p className="text-white/80 leading-relaxed">
+                    Backup power, high-speed Wi-Fi, and modern amenities ensure comfort.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-3">Unrivaled Infrastructure</h3>
-              <p className="text-white/60 leading-relaxed">
-                Reliable backup power, high-speed Wi-Fi, noise-canceling panels, wheelchair-accessible 
-                parking, and modern washrooms ensure ongoing comfort.
-              </p>
             </motion.div>
 
             <motion.div
@@ -370,18 +429,30 @@ export default function Events() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-500"
+                className="group bg-[#1A1A1A] rounded-2xl overflow-hidden border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-500"
               >
-                <h3 className="text-2xl font-bold mb-2">{space.name}</h3>
-                <p className="text-[#D4AF37] mb-6">{space.capacity}</p>
-                <ul className="space-y-3">
-                  {space.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-white/70">
-                      <CheckCircle className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={space.image}
+                    alt={space.name}
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#1A1A1A] via-transparent to-transparent" />
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold mb-2">{space.name}</h3>
+                  <p className="text-[#D4AF37] mb-6">{space.capacity}</p>
+                  <ul className="space-y-3">
+                    {space.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-white/70">
+                        <CheckCircle className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             ))}
           </div>

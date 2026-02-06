@@ -1,0 +1,17 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow private pages
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /checkout
+
+# Allow important pages
+Allow: /
+Allow: /fresh&fit
+Allow: /nankwaase-bar-and-restaurant
+Allow: /event-space
+
+# Sitemap location
+Sitemap: ${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/sitemap.xml

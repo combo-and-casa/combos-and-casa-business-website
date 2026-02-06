@@ -115,7 +115,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold mb-1">Address</p>
-                    <p className="text-white/60">123 Lifestyle Avenue<br />New York, NY 10001</p>
+                    <p className="text-white/60">East Legon Hills<br />Accra, Ghana</p>
                   </div>
                 </div>
 
@@ -125,7 +125,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold mb-1">Phone</p>
-                    <p className="text-white/60">+1 (555) 123-4567</p>
+                    <p className="text-white/60">+233 24 123 4567</p>
                   </div>
                 </div>
 
@@ -135,7 +135,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold mb-1">Email</p>
-                    <p className="text-white/60">hello@venue.com</p>
+                    <p className="text-white/60">info@combosandcasagh.com</p>
                   </div>
                 </div>
               </div>

@@ -92,7 +92,7 @@ export default function RestaurantAbout() {
           className="absolute inset-0 bg-cover bg-center opacity-40"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
+        <div className="absolute inset-0 bg-linear-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.span
@@ -108,7 +108,7 @@ export default function RestaurantAbout() {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-bold mb-6"
           >
-            Welcome to <span className="text-[#D4AF37]">VENUE</span> Restaurant
+            Welcome to <span className="text-[#D4AF37]">Nankwase</span> Bar & Restaurant
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -126,7 +126,7 @@ export default function RestaurantAbout() {
           >
             <Link
               href="/nankwaase-bar-and-restaurant/menu"
-              className="inline-flex items-center gap-2 px-8 py-4 gradient-gold text-black font-semibold rounded-full hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 px-8 py-4 linear-gold text-black font-semibold rounded-full hover:scale-105 transition-transform"
             >
               View Menu <ArrowRight className="w-5 h-5" />
             </Link>
@@ -164,7 +164,7 @@ export default function RestaurantAbout() {
                 }`}
               >
                 <div className={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                  <div className="relative h-[400px] rounded-2xl overflow-hidden group">
+                  <div className="relative h-100 rounded-2xl overflow-hidden group">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -172,7 +172,7 @@ export default function RestaurantAbout() {
                       height={400}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
                   </div>
                 </div>
                 <div className={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
@@ -214,7 +214,7 @@ export default function RestaurantAbout() {
                 className="bg-[#1A1A1A] rounded-2xl p-6 border border-white/5 hover:border-[#D4AF37]/30 transition-all"
               >
                 <div className="flex items-center gap-6">
-                  <div className="w-24 h-24 rounded-xl gradient-gold flex items-center justify-center flex-col flex-shrink-0">
+                  <div className="w-24 h-24 rounded-xl gradient-gold flex items-center justify-center flex-col shrink-0">
                     <span className="text-black font-bold text-2xl">{event.date.split(' ')[1]}</span>
                     <span className="text-black text-sm font-semibold">{event.date.split(' ')[0]}</span>
                   </div>
@@ -261,7 +261,7 @@ export default function RestaurantAbout() {
                   height={256}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </motion.div>
             ))}
           </div>
@@ -329,7 +329,7 @@ export default function RestaurantAbout() {
                   <Mail className="w-5 h-5 text-[#D4AF37] mt-1" />
                   <div>
                     <p className="font-medium">Email</p>
-                    <p className="text-white/60">restaurant@venue.com</p>
+                    <p className="text-white/60">info@combosandcasagh.com</p>
                   </div>
                 </div>
               </div>
@@ -344,7 +344,7 @@ export default function RestaurantAbout() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center bg-gradient-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20 rounded-3xl p-12"
+          className="max-w-4xl mx-auto text-center bg-linear-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20 rounded-3xl p-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Dine with Us?
@@ -354,7 +354,7 @@ export default function RestaurantAbout() {
           </p>
           <Link
             href="/nankwaase-bar-and-restaurant/menu"
-            className="inline-flex items-center gap-2 px-8 py-4 gradient-gold text-black font-semibold rounded-full hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-2 px-8 py-4 linear-gold text-black font-semibold rounded-full hover:scale-105 transition-transform"
           >
             View Full Menu <ArrowRight className="w-5 h-5" />
           </Link>
