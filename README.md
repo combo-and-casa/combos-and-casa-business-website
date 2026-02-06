@@ -236,7 +236,10 @@ combos-and-casa-business-website/
 │   └── robots.txt               # Search engine rules
 │
 ├── docs/                        # Documentation
-│   └── SEO-CONFIGURATION.md     # SEO guide
+│   ├── SEO-CONFIGURATION.md     # SEO guide
+│   ├── SECURITY-GUIDE.md        # Security best practices
+│   ├── PAYSTACK-SERVER-EXAMPLE.ts   # Server-side payment
+│   └── PAYSTACK-CLIENT-EXAMPLE.tsx  # Client-side payment
 │
 └── package.json                 # Dependencies
 ```
@@ -244,6 +247,24 @@ combos-and-casa-business-website/
 ---
 
 ## ⚙️ Configuration
+
+### 🔒 Security Configuration (Important!)
+
+**Protect your secret keys!** Environment variables with `NEXT_PUBLIC_` prefix are **exposed to the browser**.
+
+**Safe to expose (use `NEXT_PUBLIC_`):**
+- ✅ `NEXT_PUBLIC_SUPABASE_PROJECT_URL` - Public URL
+- ✅ `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Protected by RLS
+- ✅ `NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY` - Public key
+- ✅ `NEXT_PUBLIC_SITE_URL` - Website URL
+
+**Must keep secret (NO `NEXT_PUBLIC_` prefix):**
+- 🔒 `PAYSTACK_SECRET_KEY` - Use in API routes only
+- 🔒 `DATABASE_URL` - Database connection
+- 🔒 `SUPABASE_SERVICE_ROLE_KEY` - Admin access
+- 🔒 Any API tokens, passwords, or secrets
+
+📖 **Read the complete guide:** [docs/SECURITY-GUIDE.md](docs/SECURITY-GUIDE.md)
 
 ### SEO Configuration
 

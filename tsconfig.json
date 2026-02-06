@@ -36,7 +36,7 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "docs/PAYSTACK-CLIENT-EXAMPLE.txt"  ],
   "exclude": [
     "node_modules"
   ]
