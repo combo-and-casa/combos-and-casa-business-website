@@ -6,6 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 // import { Loader2 } from "lucide-react";
 
+// Force dynamic rendering - don't prerender this page during build
+export const dynamic = 'force-dynamic';
+
 export default function SignInPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
