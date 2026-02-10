@@ -6,14 +6,13 @@ import Link from 'next/link';
 import { ChevronDown, ShoppingBag, User, Menu, X } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import {createPath} from '@/lib/createpath';
+import { useApp } from '@/lib/context/AppContext';
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [restaurantDropdownOpen, setRestaurantDropdownOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [cartCount, setCartCount] = useState(0);
-    const [user, setUser] = useState(null);
+    const { cartCount, user } = useApp();
     const pathname = usePathname();
 
     useEffect(() => {
@@ -130,12 +129,12 @@ export default function Navbar() {
                             <span className="text-sm font-medium">Dashboard</span>
                             </Link>
                         ) : (
-                            <button
-                            onClick={() => createPath("signin")}
+                            <Link
+                            href="/auth/signin"
                             className="px-6 py-2.5 gradient-gold text-black font-semibold rounded-full hover:scale-105 transition-transform duration-300"
                             >
                             Sign In
-                            </button>
+                            </Link>
                         )}
                         </div>
 
@@ -186,7 +185,7 @@ export default function Navbar() {
                             ))}
                             <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
                             <Link
-                                href={createPath("Cart")}
+                                href="/cart"
                                 className="flex items-center gap-3 text-white/70"
                                 onClick={() => setIsMobileMenuOpen(false)}
                             >
@@ -195,7 +194,7 @@ export default function Navbar() {
                             </Link>
                             {user ? (
                                 <Link
-                                href={createPath("Dashboard")}
+                                href="/dashboard"
                                 className="flex items-center gap-3 text-white/70"
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 >
@@ -203,15 +202,13 @@ export default function Navbar() {
                                 Dashboard
                                 </Link>
                             ) : (
-                                <button
-                                onClick={() => {
-                                    setIsMobileMenuOpen(false);
-                                    createPath("signin");
-                                }}
-                                className="w-full py-3 gradient-gold text-black font-semibold rounded-full"
+                                <Link
+                                href="/auth/signin"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="w-full py-3 gradient-gold text-black font-semibold rounded-full text-center"
                                 >
                                 Sign In
-                                </button>
+                                </Link>
                             )}
                             </div>
                         </div>

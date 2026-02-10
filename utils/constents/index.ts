@@ -3,7 +3,9 @@ import type {
     ServiceCardProps,
     StatsProps, 
     featuresProps,
-    planProps 
+    planProps,
+    Service,
+    Event 
 } from "../types/index";
 import { 
     UtensilsCrossed, 
@@ -13,7 +15,9 @@ import {
     Target,
     Clock,
     Calendar,
-    Award
+    Award,
+    ChefHat,
+    Wine
 } from "lucide-react";
 
 export const navItems: NavItemsProps[] = [
@@ -159,6 +163,51 @@ export const plans: planProps[] = [
         "5 guest passes per month",
         "Free merchandise pack"
       ]
+    }
+  ];
+
+export const restaurantServices: Service[] = [
+    {
+      icon: ChefHat,
+      title: "Fine Dining",
+      description: "Experience culinary artistry with our chef's innovative seasonal menu. Every dish is crafted with precision using locally sourced ingredients, creating an unforgettable gastronomic journey.",
+      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80"
+    },
+    {
+      icon: Wine,
+      title: "Premium Bar",
+      description: "Curated wine list and craft cocktails by expert mixologists. Our bar features an extensive collection of fine wines and signature cocktails that perfectly complement your dining experience.",
+      image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&q=80"
+    },
+    {
+      icon: UtensilsCrossed,
+      title: "Private Dining",
+      description: "Intimate dining experiences for special occasions. Our private dining rooms offer an exclusive setting for celebrations, business dinners, and memorable gatherings with personalized service.",
+      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80"
+    },
+    {
+      icon: Calendar,
+      title: "Chef's Table",
+      description: "Exclusive tasting menus with behind-the-scenes experience. Join us for an interactive culinary journey where our chef creates a bespoke menu while you watch the magic happen.",
+      image: "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1200&q=80"
+    }
+  ];
+
+export const upcomingEvents: Event[] = [
+    {
+      date: "Feb 14",
+      title: "Valentine's Special Menu",
+      description: "Romantic 5-course dinner with wine pairing"
+    },
+    {
+      date: "Feb 20",
+      title: "Wine Tasting Evening",
+      description: "Explore premium wines from around the world"
+    },
+    {
+      date: "Mar 1",
+      title: "Chef's Table Experience",
+      description: "Interactive dining with our executive chef"
     }
   ];
 

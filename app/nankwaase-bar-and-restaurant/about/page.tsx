@@ -8,73 +8,12 @@ import {
   MapPin, 
   Phone, 
   Mail,
-  ChefHat,
-  Wine,
-  UtensilsCrossed,
-  Calendar,
   ArrowRight
 } from "lucide-react";
-import { LucideIcon } from "lucide-react";
+import { restaurantServices, upcomingEvents } from "@/utils/constents";
 
-interface Service {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  image: string;
-}
-
-interface Event {
-  date: string;
-  title: string;
-  description: string;
-}
 
 export default function RestaurantAbout() {
-  const services = [
-    {
-      icon: ChefHat,
-      title: "Fine Dining",
-      description: "Experience culinary artistry with our chef's innovative seasonal menu. Every dish is crafted with precision using locally sourced ingredients, creating an unforgettable gastronomic journey.",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80"
-    },
-    {
-      icon: Wine,
-      title: "Premium Bar",
-      description: "Curated wine list and craft cocktails by expert mixologists. Our bar features an extensive collection of fine wines and signature cocktails that perfectly complement your dining experience.",
-      image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&q=80"
-    },
-    {
-      icon: UtensilsCrossed,
-      title: "Private Dining",
-      description: "Intimate dining experiences for special occasions. Our private dining rooms offer an exclusive setting for celebrations, business dinners, and memorable gatherings with personalized service.",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80"
-    },
-    {
-      icon: Calendar,
-      title: "Chef's Table",
-      description: "Exclusive tasting menus with behind-the-scenes experience. Join us for an interactive culinary journey where our chef creates a bespoke menu while you watch the magic happen.",
-      image: "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1200&q=80"
-    }
-  ];
-
-  const upcomingEvents = [
-    {
-      date: "Feb 14",
-      title: "Valentine's Special Menu",
-      description: "Romantic 5-course dinner with wine pairing"
-    },
-    {
-      date: "Feb 20",
-      title: "Wine Tasting Evening",
-      description: "Explore premium wines from around the world"
-    },
-    {
-      date: "Mar 1",
-      title: "Chef's Table Experience",
-      description: "Interactive dining with our executive chef"
-    }
-  ];
-
   const galleryImages = [
     "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
     "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
@@ -126,7 +65,7 @@ export default function RestaurantAbout() {
           >
             <Link
               href="/nankwaase-bar-and-restaurant/menu"
-              className="inline-flex items-center gap-2 px-8 py-4 linear-gold text-black font-semibold rounded-full hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 px-8 py-4 gradient-gold linear-gold text-black font-semibold rounded-full hover:scale-105 transition-transform"
             >
               View Menu <ArrowRight className="w-5 h-5" />
             </Link>
@@ -152,7 +91,7 @@ export default function RestaurantAbout() {
           </motion.div>
 
           <div className="space-y-24">
-            {services.map((service, index) => (
+            {restaurantServices.map((service, index) => (
               <motion.div
                 key={service.title}
                 initial={{ opacity: 0, y: 40 }}

@@ -46,3 +46,16 @@ export interface PlanCardProps {
     onSelect: (plan: planProps) => void;
     index: number;
 }
+
+export interface Service {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface Event {
+  date: string;
+  title: string;
+  description: string;
+}

@@ -53,7 +53,7 @@ export default function MenuCard({ item, onAddToCart }: MenuCardProps) {
             {item.name}
           </h3>
           <span className="text-[#D4AF37] font-bold text-lg whitespace-nowrap">
-            ${item.price?.toFixed(2)}
+            GHS {item.price?.toFixed(2)}
           </span>
         </div>
 

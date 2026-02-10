@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { supabase } from "@/lib/supabase/client";
 import { 
   ShoppingBag, 
   Dumbbell, 
@@ -59,6 +61,7 @@ interface User {
 }
 
 export default function Dashboard() {
+  const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [memberships, setMemberships] = useState<Membership[]>([]);
@@ -66,10 +69,19 @@ export default function Dashboard() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  // Check authentication and load data
   useEffect(() => {
-    const loadDashboardData = async () => {
+    const loadDashboard = async () => {
+      // Check authentication first
+      const { data: { user: authUser } } = await supabase.auth.getUser();
+      
+      if (!authUser) {
+        router.push('/auth/signin');
+        return;
+      }
+
       // Simulate API calls
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 500));
 
       // Mock user data
       setUser({
@@ -123,8 +135,8 @@ export default function Dashboard() {
       setIsLoading(false);
     };
 
-    loadDashboardData();
-  }, []);
+    loadDashboard();
+  }, [router]);
 
   const statusColors: Record<string, string> = {
     pending: "bg-yellow-500/10 text-yellow-500 border-yellow-500/30",
@@ -169,10 +181,9 @@ export default function Dashboard() {
               <p className="text-white/50">Manage your orders, memberships, and bookings</p>
             </div>
             <button
-              onClick={() => {
-                // Simulate logout
-                console.log("User logged out");
-                window.location.href = "/";
+              onClick={async () => {
+                await supabase.auth.signOut();
+                router.push('/auth/signin');
               }}
               className="flex items-center gap-2 px-6 py-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors w-fit"
             >

@@ -7,6 +7,7 @@ import Link from "next/link";
 import MenuCard from "@/components/restaurant/MenuCard";
 import CategoryTabs from "@/components/restaurant/CategoryCard";
 import Image from "next/image";
+import { useApp } from "@/lib/context/AppContext";
 
 interface MenuItem {
   id: string;
@@ -18,13 +19,9 @@ interface MenuItem {
   dietary_tags?: string[];
 }
 
-interface CartItem extends MenuItem {
-  quantity: number;
-}
-
 export default function Restaurant() {
+  const { cart, addToCart: addToCartContext, updateCartItemQuantity, cartCount } = useApp();
   const [activeCategory, setActiveCategory] = useState("starters");
-  const [cart, setCart] = useState<CartItem[]>([]);
   const [showCartPreview, setShowCartPreview] = useState(false);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -172,46 +169,22 @@ export default function Restaurant() {
     fetchMenuItems();
   }, []);
 
-  useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setCart(savedCart);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("storage"));
-  }, [cart]);
-
   const categories = ["starters", "mains", "desserts", "cocktails", "wines", "non-alcoholic"];
   const filteredItems = menuItems.filter((item) => item.category === activeCategory);
 
   const addToCart = (item: MenuItem) => {
-    setCart((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
-      if (existing) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-        );
-      }
-      return [...prev, { ...item, quantity: 1 }];
-    });
+    addToCartContext({ ...item, quantity: 1 });
     setShowCartPreview(true);
   };
 
   const updateQuantity = (id: string, delta: number) => {
-    setCart((prev) =>
-      prev
-        .map((item) =>
-          item.id === id ? { ...item, quantity: item.quantity + delta } : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
+    const item = cart.find(item => item.id === id);
+    if (item) {
+      updateCartItemQuantity(id, item.quantity + delta);
+    }
   };
 
   const cartTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-  const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] pt-20">
@@ -300,12 +273,12 @@ export default function Restaurant() {
           className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50"
         >
           <Link
-            href="/nankwaase-bar-and-restaurant/checkout"
+            href="/checkout"
             className="flex items-center gap-4 px-6 py-4 gradient-gold text-black rounded-full shadow-2xl hover:scale-105 transition-transform"
           >
             <ShoppingBag className="w-5 h-5" />
             <span className="font-semibold">Checkout ({cartCount})</span>
-            <span className="font-bold">${cartTotal.toFixed(2)}</span>
+            <span className="font-bold">GHS {cartTotal.toFixed(2)}</span>
           </Link>
         </motion.div>
       )}
@@ -352,7 +325,7 @@ export default function Restaurant() {
                     )}
                     <div className="flex-1">
                       <h4 className="font-medium">{item.name}</h4>
-                      <p className="text-[#D4AF37]">${item.price?.toFixed(2)}</p>
+                      <p className="text-[#D4AF37]">GHS {(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                     <div className="flex items-center gap-2">
                       <button
@@ -376,7 +349,7 @@ export default function Restaurant() {
               <div className="border-t border-white/10 pt-4 mb-6">
                 <div className="flex justify-between text-lg font-semibold">
                   <span>Total</span>
-                  <span className="text-[#D4AF37]">${cartTotal.toFixed(2)}</span>
+                  <span className="text-[#D4AF37]">GHS {cartTotal.toFixed(2)}</span>
                 </div>
               </div>
 

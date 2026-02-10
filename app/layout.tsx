@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StructuredData from "@/components/StructuredData";
 import { organizationSchema } from "@/lib/structured-data";
+import { AppProvider } from "@/lib/context/AppContext";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -104,16 +106,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <StructuredData data={organizationSchema} />
       </head>
       <body
         className={`min-h-screen bg-[#0A0A0A] text-white ${inter.variable} ${poppins.variable} antialiased`}
+        suppressHydrationWarning
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <AppProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <Toaster 
+            position="top-right" 
+            toastOptions={{
+              style: {
+                background: '#1A1A1A',
+                color: '#fff',
+                border: '1px solid rgba(212, 175, 55, 0.3)',
+              },
+              className: 'sonner-toast',
+            }}
+          />
+        </AppProvider>
       </body>
     </html>
   );
