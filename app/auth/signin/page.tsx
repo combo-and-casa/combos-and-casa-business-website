@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Eye, EyeOff } from 'lucide-react';
@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
-export default function SignInPage() {
+function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -125,5 +125,33 @@ export default function SignInPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense fallback={
+      <div className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-20">
+        <div className="absolute inset-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80')"
+            }}
+          />
+          <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-[#0A0A0A]" />
+        </div>
+        <div className="relative z-10 bg-[#1A1A1A]/70 backdrop-blur-xl p-8 rounded-2xl shadow-2xl w-full max-w-md border border-[#D4AF37]/20">
+          <div className="text-center">
+            <div className="animate-pulse space-y-4">
+              <div className="h-8 bg-white/10 rounded w-3/4 mx-auto"></div>
+              <div className="h-4 bg-white/10 rounded w-1/2 mx-auto"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <SignInForm />
+    </Suspense>
   );
 }
