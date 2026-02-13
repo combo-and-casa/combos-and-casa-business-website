@@ -131,6 +131,7 @@ export const features: featuresProps[] = [
 
 export const plans: planProps[] = [
     {
+      id: "550e8400-e29b-41d4-a716-446655440001", // Basic plan UUID
       name: "Basic",
         price: 29,
         duration: "month",
@@ -141,6 +142,7 @@ export const plans: planProps[] = [
       ]
     },
     {
+      id: "550e8400-e29b-41d4-a716-446655440002", // Standard plan UUID
       name: "Standard",
         price: 49,
         duration: "month",
@@ -153,6 +155,7 @@ export const plans: planProps[] = [
       is_popular: true
     },
     {
+      id: "550e8400-e29b-41d4-a716-446655440003", // Premium plan UUID
       name: "Premium",
         price: 79,
         duration: "month",

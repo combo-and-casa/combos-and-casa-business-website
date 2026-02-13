@@ -10,11 +10,14 @@ import {
   CheckCircle,
   Building2,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Loader2
 } from "lucide-react";
 import EventGallery from "@/components/events/EventGallery";
 import BookingModal from "@/components/events/BookingModal";
 import Image from "next/image";
+import { EventSpaceProps } from "@/utils/types";
+import { toast } from "sonner";
 
 const AboutCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -86,36 +89,48 @@ const AboutCarousel = () => {
 
 export default function Events() {
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [spaces, setSpaces] = useState<EventSpaceProps[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchSpaces();
+  }, []);
+
+  const fetchSpaces = async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch('/api/event-spaces/spaces');
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to fetch event spaces');
+      }
+
+      setSpaces(data.data);
+      setError(null);
+    } catch (err) {
+      console.error('Error fetching spaces:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load event spaces');
+      toast.error('Failed to load event spaces');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleBooking = () => {
+    if (spaces.length === 0) {
+      toast.error('No event spaces available');
+      return;
+    }
     setShowBookingModal(true);
   };
 
   const handleSuccess = () => {
     setShowBookingModal(false);
-    // Redirect to home or show success message
   };
 
-  const spaces = [
-    {
-      name: "Grand Ballroom",
-      capacity: "200-300 guests",
-      features: ["Premium sound system", "LED lighting", "Stage setup", "Full bar"],
-      image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80"
-    },
-    {
-      name: "Rooftop Terrace",
-      capacity: "100-150 guests",
-      features: ["City views", "Outdoor bar", "Lounge seating", "Fire pits"],
-      image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80"
-    },
-    {
-      name: "Private Dining",
-      capacity: "20-40 guests",
-      features: ["Chef's table", "Wine cellar", "Intimate setting", "Custom menu"],
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80"
-    }
-  ];
+  const currency = process.env.NEXT_PUBLIC_PAYSTACK_CURRENCY || 'GHS';
 
   const services = [
     { icon: Users, text: "Professional event planning" },
@@ -301,7 +316,7 @@ export default function Events() {
                 </div>
               </div>
             </motion.div>
-
+            {/*  */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -421,41 +436,70 @@ export default function Events() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            {spaces.map((space, index) => (
-              <motion.div
-                key={space.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group bg-[#1A1A1A] rounded-2xl overflow-hidden border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-500"
+          {isLoading ? (
+            <div className="flex items-center justify-center py-20">
+              <Loader2 className="w-8 h-8 animate-spin text-[#D4AF37]" />
+            </div>
+          ) : error ? (
+            <div className="text-center py-20">
+              <p className="text-white/60 mb-4">{error}</p>
+              <button
+                onClick={fetchSpaces}
+                className="px-6 py-3 gradient-gold text-black font-semibold rounded-xl hover:scale-105 transition-transform"
               >
-                <div className="relative h-64 overflow-hidden">
-                  <Image
-                    src={space.image}
-                    alt={space.name}
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#1A1A1A] via-transparent to-transparent" />
-                </div>
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold mb-2">{space.name}</h3>
-                  <p className="text-[#D4AF37] mb-6">{space.capacity}</p>
-                  <ul className="space-y-3">
-                    {space.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center gap-3 text-white/70">
-                        <CheckCircle className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                Retry
+              </button>
+            </div>
+          ) : spaces.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-white/60">No event spaces available at the moment.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+              {spaces.map((space, index) => (
+                <motion.div
+                  key={space.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group bg-[#1A1A1A] rounded-2xl overflow-hidden border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-500"
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={space.image}
+                      alt={space.name}
+                      width={400}
+                      height={400}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-[#1A1A1A] via-transparent to-transparent" />
+                  </div>
+                  <div className="p-8">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-2xl font-bold mb-2">{space.name}</h3>
+                      <div className="px-4 py-2 bg-[#D4AF37] text-black font-semibold rounded-full text-sm">
+                        {currency === 'GHS' ? '₵' : currency === 'NGN' ? '₦' : currency === 'ZAR' ? 'R' : '$'}
+                        {space.price}/hr
+                      </div>
+                    </div>
+                    <p className="text-[#D4AF37] mb-4">{space.capacity}</p>
+                    {space.description && (
+                      <p className="text-white/60 text-sm mb-6">{space.description}</p>
+                    )}
+                    <ul className="space-y-3">
+                      {space.features.slice(0, 4).map((feature, idx) => (
+                        <li key={idx} className="flex items-center gap-3 text-white/70 text-sm">
+                          <CheckCircle className="w-4 h-4 text-[#D4AF37] shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -537,7 +581,11 @@ export default function Events() {
 
       {/* Booking Modal */}
       {showBookingModal && (
-        <BookingModal onClose={() => setShowBookingModal(false)} onSuccess={handleSuccess} />
+        <BookingModal 
+          onClose={() => setShowBookingModal(false)} 
+          onSuccess={handleSuccess} 
+          spaces={spaces}
+        />
       )}
     </div>
   );

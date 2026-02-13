@@ -4,9 +4,23 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 export const createSupabaseServerClient = async () => {
   const cookieStore = await cookies();
 
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error(
+      "⚠️ Missing Supabase environment variables!\n" +
+      "Please create a .env.local file with:\n" +
+      "- NEXT_PUBLIC_SUPABASE_PROJECT_URL\n" +
+      "- NEXT_PUBLIC_SUPABASE_ANON_KEY\n" +
+      "See .env.example for reference."
+    );
+    throw new Error("Missing Supabase environment variables");
+  }
+
   return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         getAll() {

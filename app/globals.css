@@ -149,3 +149,39 @@
 .hover-gold:hover {
   color: #D4AF37;
 }
+
+/* Custom scrollbar styling for tables */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 8px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: #F4E4BA;
+}
+
+/* Smooth scrolling */
+.overflow-x-auto {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar on tab navigation for mobile */
+@media (max-width: 768px) {
+  [role="tablist"] {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  [role="tablist"]::-webkit-scrollbar {
+    display: none;
+  }
+}

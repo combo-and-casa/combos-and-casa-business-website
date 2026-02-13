@@ -187,14 +187,21 @@ export default function Checkout() {
         price: item.price
       }));
 
+      console.log('Attempting to save order items:', orderItems);
+
       const { error: itemsError } = await supabase
         .from('order_items')
         .insert(orderItems);
 
       if (itemsError) {
         console.error('Order items error:', itemsError);
-        toast.error('Order items could not be saved. Please contact support.');
+        console.error('Order items error details:', JSON.stringify(itemsError, null, 2));
+        toast.error(`Order items could not be saved: ${itemsError.message || 'Unknown error'}. Order ID: ${orderInsert.id}`);
+        setIsSubmitting(false);
+        return;
       }
+
+      console.log('Order and items saved successfully!');
 
       // Clear cart and show success
       clearCart();

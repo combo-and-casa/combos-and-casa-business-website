@@ -1,9 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
-// import { base44 } from "@/api/base44Client";
-// import { useQuery } from "@tanstack/react-query";
 import { 
   Clock,
   Heart,
@@ -15,32 +13,41 @@ import PlanCard from "@/components/fitness/PlanCard";
 import MembershipModal from "@/components/fitness/MembershipModal";
 import Image from 'next/image';
 import { planProps } from '@/utils/types';
-import { features,plans } from '@/utils/constents';
+import { features } from '@/utils/constents';
+import { toast } from 'sonner';
 
-export default function freahAndFit() {
+export default function FreshAndFit() {
   
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [selectedPlan, setSelectedPlan] = useState<planProps | null>(null);
-  // eslint-disable-next-line react-hooks/rules-of-hooks, @typescript-eslint/no-unused-vars
-  const [user, setUser] = useState(null);
+  const [plans, setPlans] = useState<planProps[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // const { data: plans = [], isLoading } = useQuery({
-  //   queryKey: ["gymPlans"],
-  //   queryFn: () => base44.entities.GymPlan.list()
-  // });
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch('/api/fitness/plans');
+        const data = await response.json();
 
-  // React.useEffect(() => {
-  //   const loadUser = async () => {
-  //     try {
-  //       const isAuth = await base44.auth.isAuthenticated();
-  //       if (isAuth) {
-  //         const userData = await base44.auth.me();
-  //         setUser(userData);
-  //       }
-  //     } catch (e) {}
-  //   };
-  //   loadUser();
-  // }, []);
+        if (!response.ok || !data.success) {
+          throw new Error(data.error || 'Failed to fetch plans');
+        }
+
+        setPlans(data.data);
+        setError(null);
+      } catch (err) {
+        console.error('Error fetching plans:', err);
+        setError(err instanceof Error ? err.message : 'Failed to load plans');
+        toast.error('Failed to load membership plans');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPlans();
+  }, []);
+
 
   const scrollToPlans = () => {
     const plansSection = document.getElementById("plans");
@@ -57,17 +64,11 @@ export default function freahAndFit() {
   };
 
   const handleSelectPlan = (plan: planProps) => {
-    // if (!user) {
-    //   base44.auth.redirectToLogin(window.location.href);
-    //   return;
-    // }
-    
     setSelectedPlan(plan);
   };
 
   const handleSuccess = () => {
     setSelectedPlan(null);
-    
   };
 
   
@@ -394,29 +395,44 @@ export default function freahAndFit() {
             </p>
           </motion.div>
 
-          {/* {isLoading ? (
+          {isLoading ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="bg-[#1A1A1A] rounded-3xl h-64 animate-pulse" />
+                <div key={i} className="bg-[#1A1A1A] rounded-3xl p-8 border border-white/5 h-96 animate-pulse">
+                  <div className="h-6 bg-white/10 rounded mb-4 w-1/2"></div>
+                  <div className="h-8 bg-white/10 rounded mb-6 w-3/4"></div>
+                  <div className="space-y-3">
+                    <div className="h-4 bg-white/10 rounded w-full"></div>
+                    <div className="h-4 bg-white/10 rounded w-5/6"></div>
+                    <div className="h-4 bg-white/10 rounded w-4/5"></div>
+                  </div>
+                </div>
               ))}
             </div>
-          ) : ( */}
+          ) : error ? (
+            <div className="text-center py-20">
+              <p className="text-red-400 mb-4">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="px-6 py-3 gradient-gold text-black font-semibold rounded-full hover:scale-105 transition-transform"
+              >
+                Retry
+              </button>
+            </div>
+          ) : plans.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-white/50">No membership plans available at the moment.</p>
+            </div>
+          ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {plans.map((plan: planProps, index: number) => (
                 <PlanCard
-                  key={plan.name}
+                  key={plan.id}
                   plan={plan}
                   onSelect={handleSelectPlan}
                   index={index}
                 />
               ))}
-            </div>
-          {/* )} */}
-
-          {/* {plans.length === 0 && !isLoading && ( */}
-          {plans.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-white/50">No membership plans available at the moment.</p>
             </div>
           )}
         </div>

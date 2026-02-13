@@ -6,6 +6,8 @@ import { Calendar, Clock, Users, Mail, Phone, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 // import { Select } from "@/components/ui/select";
+import { supabase } from "@/lib/supabase/client";
+import {toast} from "sonner";
 
 interface ReservationFormData {
   name: string;
@@ -13,8 +15,9 @@ interface ReservationFormData {
   phone: string;
   date: string;
   time: string;
-  guests: string;
+  guests: number
   specialRequests: string;
+  status?: string;
 }
 
 export default function Reservations() {
@@ -24,8 +27,9 @@ export default function Reservations() {
     phone: "",
     date: "",
     time: "",
-    guests: "2",
-    specialRequests: ""
+    guests: 2,
+    specialRequests: "",
+    status: "pending"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -33,9 +37,34 @@ export default function Reservations() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    toast.loading('Submitting your reservation...');
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Save reservation to Supabase
+    const { data:reservationInsert, error: reservationError } = await supabase
+      .from('restaurant_reservations')
+      .insert({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        reservation_date: formData.date,
+        reservation_time: formData.time,
+        guests: formData.guests,
+        special_requests: formData.specialRequests,
+        status: formData.status
+      });
+
+      toast.dismiss();
+      toast.success('Reservation submitted successfully!');
+
+
+    if (reservationError) {
+      console.error('Error saving reservation:', reservationError);
+      toast.error('Failed to submit reservation. Please try again.');
+      setIsSubmitting(false);
+      return;
+    }
+
+    console.log('Reservation saved:', reservationInsert);
     
     setIsSubmitting(false);
     setSubmitSuccess(true);
@@ -48,8 +77,9 @@ export default function Reservations() {
         phone: "",
         date: "",
         time: "",
-        guests: "2",
-        specialRequests: ""
+        guests: 2,
+        specialRequests: "",
+        status: "pending"
       });
       setSubmitSuccess(false);
     }, 3000);
@@ -58,7 +88,7 @@ export default function Reservations() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.type === 'number' ? Number(e.target.value) : e.target.value
     }));
   };
 

@@ -75,14 +75,30 @@ export function AppProvider({ children }: { children: ReactNode }) {
   // Check for authenticated user on mount
   useEffect(() => {
     const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
+      try {
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (error) {
+          console.error('Error fetching user:', error);
+          setUser(null);
+          return;
+        }
+        setUser(user);
+      } catch (error) {
+        console.error('Unexpected error fetching user:', error);
+        setUser(null);
+      }
     };
     getUser();
 
-    // Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+    // Listen for auth state changes (including session expiry)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('Auth state changed:', event);
+      
+      if (event === 'SIGNED_OUT') {
+        setUser(null);
+      } else {
+        setUser(session?.user ?? null);
+      }
     });
 
     return () => {

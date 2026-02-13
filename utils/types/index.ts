@@ -34,6 +34,7 @@ export interface featuresProps {
 }
 
 export interface planProps {
+    id: string;
     name: string;
     price: number;
     duration: string;
@@ -45,6 +46,16 @@ export interface PlanCardProps {
     plan: planProps;
     onSelect: (plan: planProps) => void;
     index: number;
+}
+
+export interface EventSpaceProps {
+    id: string;
+    name: string;
+    capacity: string;
+    description: string;
+    features: string[];
+    image: string;
+    price: number;
 }
 
 export interface Service {
