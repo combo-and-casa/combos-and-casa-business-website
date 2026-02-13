@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import dynamic from 'next/dynamic';
 import { 
   ArrowLeft, 
   Check,
@@ -22,8 +23,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useApp } from "@/lib/context/AppContext";
 import { supabase } from "@/lib/supabase/client";
-import { PaystackButton } from 'react-paystack';
 import { toast } from 'sonner';
+
+// Dynamically import PaystackButton to avoid SSR issues
+const PaystackButton = dynamic(
+  () => import('react-paystack').then((mod) => mod.PaystackButton),
+  { ssr: false }
+);
 
 interface OrderData {
   customer_name: string;
