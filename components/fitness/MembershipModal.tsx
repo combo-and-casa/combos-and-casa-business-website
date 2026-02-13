@@ -31,6 +31,13 @@ export default function MembershipModal({ plan, onClose, onSuccess }: Membership
   const { user } = useApp();
   const router = useRouter();
 
+  // Generate payment reference once on mount
+  const [paymentReference] = useState(() => {
+    const timestamp = new Date().getTime();
+    const randomId = Math.random().toString(36).substring(2, 10);
+    return `MEM-${timestamp}-${randomId}`;
+  });
+
   // Redirect to login if not authenticated
   if (!user) {
     toast.error('Please sign in to purchase a membership');
@@ -60,7 +67,7 @@ export default function MembershipModal({ plan, onClose, onSuccess }: Membership
   const currency = process.env.NEXT_PUBLIC_PAYSTACK_CURRENCY || 'GHS';
   
   const paystackConfig = {
-    reference: `MEM-${new Date().getTime()}-${crypto.randomUUID().slice(0, 8)}`,
+    reference: paymentReference,
     email: user.email || '',
     amount: Math.round(plan.price * 100), // Amount in pesewas
     publicKey,

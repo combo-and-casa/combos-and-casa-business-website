@@ -67,11 +67,18 @@ export default function Checkout() {
   const tax = subtotal * 0.08;
   const total = subtotal + tax;
 
+  // Generate payment reference once on mount
+  const [paymentReference] = useState(() => {
+    const timestamp = new Date().getTime();
+    const randomId = Math.random().toString(36).substring(2, 10);
+    return `PAY-${timestamp}-${randomId}`;
+  });
+
   // Paystack configuration
   const publicKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || '';
   const currency = process.env.NEXT_PUBLIC_PAYSTACK_CURRENCY || 'GHS';
   const paystackConfig = {
-    reference: `PAY-${new Date().getTime()}-${crypto.randomUUID().slice(0, 8)}`,
+    reference: paymentReference,
     email: orderData.customer_email,
     amount: Math.round(total * 100), // Amount in kobo/pesewas
     publicKey,
@@ -131,9 +138,8 @@ export default function Checkout() {
       toast.success('Payment verified successfully!');
 
       // Payment verified, now save order to database
-      const timestamp = new Date().getTime();
-      const randomId = crypto.randomUUID().slice(0, 8).toUpperCase();
-      const orderRef = `ORD-${timestamp}-${randomId}`;
+      const randomId = Math.random().toString(36).substring(2, 10).toUpperCase();
+      const orderRef = `ORD-${new Date().getTime()}-${randomId}`;
 
       console.log('Attempting to save order with data:', {
         user_id: user?.id || null,

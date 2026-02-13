@@ -44,6 +44,13 @@ export default function BookingModal({ onClose, onSuccess, spaces }: BookingModa
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { user } = useApp();
   
+  // Generate payment reference once on mount
+  const [paymentReference] = useState(() => {
+    const timestamp = new Date().getTime();
+    const randomId = Math.random().toString(36).substring(2, 10);
+    return `EVENT-${timestamp}-${randomId}`;
+  });
+  
   const [formData, setFormData] = useState<FormData>({
     event_space_id: "",
     purpose: "",
@@ -66,7 +73,7 @@ export default function BookingModal({ onClose, onSuccess, spaces }: BookingModa
   const currency = process.env.NEXT_PUBLIC_PAYSTACK_CURRENCY || 'GHS';
   
   const paystackConfig = {
-    reference: `EVENT-${new Date().getTime()}-${crypto.randomUUID().slice(0, 8)}`,
+    reference: paymentReference,
     email: formData.customer_email || '',
     amount: selectedSpace ? Math.round(selectedSpace.price * 100) : 0,
     publicKey,
