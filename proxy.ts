@@ -2,15 +2,26 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
 export async function proxy(request: NextRequest) {
+  // Add pathname to headers for conditional rendering
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-pathname', request.nextUrl.pathname);
+  
   let response = NextResponse.next({
     request: {
-      headers: request.headers,
+      headers: requestHeaders,
     },
   });
 
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return response;
+  }
+
   const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_PROJECT_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseAnonKey,
     {
       cookies: {
         getAll() {
@@ -21,7 +32,9 @@ export async function proxy(request: NextRequest) {
             request.cookies.set(name, value)
           );
           response = NextResponse.next({
-            request,
+            request: {
+              headers: requestHeaders,
+            },
           });
           cookiesToSet.forEach(({ name, value, options }) =>
             response.cookies.set(name, value, options)
@@ -34,17 +47,35 @@ export async function proxy(request: NextRequest) {
   // Refresh session if expired - this will also update the cookies
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Protect dashboard route
-  if (request.nextUrl.pathname.startsWith('/dashboard') && !user) {
-    return NextResponse.redirect(new URL('/auth/signin', request.url));
+  // Protect admin routes
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    if (!user) {
+      return NextResponse.redirect(new URL('/auth/signin?message=Please sign in to continue', request.url));
+    }
+    
+    // Check if user is admin
+    const { data: isAdminData } = await supabase.rpc('is_admin');
+    if (!isAdminData) {
+      return NextResponse.redirect(new URL('/?message=Access denied. Admin privileges required.', request.url));
+    }
   }
 
-  // Redirect to dashboard if already signed in and trying to access auth pages
+  // Protect dashboard route
+  if (request.nextUrl.pathname.startsWith('/dashboard') && !user) {
+    return NextResponse.redirect(new URL('/auth/signin?message=Please sign in to continue', request.url));
+  }
+
+  // Redirect to appropriate dashboard if already signed in and trying to access auth pages
   if (
     (request.nextUrl.pathname.startsWith('/auth/signin') ||
      request.nextUrl.pathname.startsWith('/auth/signup')) &&
     user
   ) {
+    // Check if user is admin
+    const { data: isAdminData } = await supabase.rpc('is_admin');
+    if (isAdminData) {
+      return NextResponse.redirect(new URL('/admin', request.url));
+    }
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
@@ -53,6 +84,7 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    '/admin/:path*',
     '/dashboard/:path*',
     '/auth/:path*',
     /*

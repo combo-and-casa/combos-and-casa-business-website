@@ -19,8 +19,17 @@ export async function login(formData: FormData) {
     return { error: error.message };
   }
 
+  // Check if user is admin
+  const { data: isAdminData } = await supabase.rpc('is_admin');
+  
   revalidatePath('/', 'layout');
-  redirect('/dashboard');
+  
+  // Redirect to admin if user is admin, otherwise to dashboard
+  if (isAdminData) {
+    redirect('/admin');
+  } else {
+    redirect('/dashboard');
+  }
 }
 
 export async function signup(formData: FormData) {
