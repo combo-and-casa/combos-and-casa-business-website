@@ -3,7 +3,7 @@ import { createServerClient } from '@supabase/ssr';
 
 const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // Add pathname to headers for conditional rendering
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-pathname', request.nextUrl.pathname);
