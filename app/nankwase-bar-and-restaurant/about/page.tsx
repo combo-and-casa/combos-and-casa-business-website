@@ -24,7 +24,6 @@ interface UpcomingEvent {
 
 export default function RestaurantAbout() {
   const [upcomingEvents, setUpcomingEvents] = useState<UpcomingEvent[]>([]);
-  const [isLoadingEvents, setIsLoadingEvents] = useState(true);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -39,8 +38,6 @@ export default function RestaurantAbout() {
         setUpcomingEvents(data.events || []);
       } catch (error) {
         console.error("Failed to fetch events:", error);
-      } finally {
-        setIsLoadingEvents(false);
       }
     };
 

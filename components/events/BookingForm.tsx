@@ -57,6 +57,7 @@ export default function BookingForm({ user }: BookingFormProps) {
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     toast.loading('Submitting your booking request...');
 
     try {

@@ -1,8 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
-const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
 export async function proxy(request: NextRequest) {
   // Add pathname to headers for conditional rendering
   const requestHeaders = new Headers(request.headers);
@@ -45,31 +43,6 @@ export async function proxy(request: NextRequest) {
       },
     }
   );
-
-  // Get user session
-  const { data: { session, user } } = await supabase.auth.getSession();
-
-  // Check session age - force re-authentication after 1 day
-  if (session && user) {
-    const sessionCreatedAt = new Date(session.created_at || 0).getTime();
-    const now = Date.now();
-    const sessionAge = now - sessionCreatedAt;
-
-    // If session is older than 1 day, sign out and redirect
-    if (sessionAge > ONE_DAY_IN_MS) {
-      await supabase.auth.signOut();
-      
-      // Only redirect to signin if on protected routes
-      if (
-        request.nextUrl.pathname.startsWith('/admin') ||
-        request.nextUrl.pathname.startsWith('/dashboard')
-      ) {
-        return NextResponse.redirect(
-          new URL('/auth/signin?message=Your session has expired. Please sign in again.', request.url)
-        );
-      }
-    }
-  }
 
   // Refresh session if expired - this will also update the cookies
   const { data: { user: currentUser } } = await supabase.auth.getUser();
