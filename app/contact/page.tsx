@@ -2,7 +2,14 @@
 
 import React, { useState, useEffect, useEffectEvent } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle, Facebook, Instagram } from "lucide-react";
+
+// Custom TikTok Icon Component
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -19,6 +26,7 @@ export default function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   
   const updateSection = useEffectEvent((value: string) => {
@@ -35,15 +43,43 @@ export default function Contact() {
   }, []);
 
 
-  const handleSubmit = async (e: React.SubmitEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setSubmitted(true);
+    try {
+      const response = await fetch('/api/send-contact-enquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to send message');
+      }
+
+      setIsSubmitting(false);
+      setSubmitted(true);
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        section: "",
+        subject: "",
+        message: ""
+      });
+    } catch (err) {
+      setIsSubmitting(false);
+      setError(err instanceof Error ? err.message : 'Failed to send message. Please try again.');
+      console.error('Contact form error:', err);
+    }
   };
 
   if (submitted) {
@@ -125,7 +161,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="font-semibold mb-1">Phone</p>
-                    <p className="text-white/60">+233 24 123 4567</p>
+                    <p className="text-white/60">0509251268, 0509252315 </p>
                   </div>
                 </div>
 
@@ -141,20 +177,101 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5">
-              <h3 className="text-xl font-bold mb-4">Business Hours</h3>
-              <div className="space-y-2 text-white/60">
-                <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span className="text-white">9:00 AM - 10:00 PM</span>
+
+            {/* Social Media Section */}
+            <div className="bg-[#1A1A1A] rounded-2xl py-6 px-8 border border-white/5">
+              <h3 className="text-xl font-bold mb-2">Follow Us</h3>
+              
+              {/* Nankwaase Bar & Restaurant */}
+              <div className="mb-2">
+                <h4 className="text-white text-sm font-semibold mb-1">Nankwase Bar & Restaurant</h4>
+                <div className="flex gap-3">
+                  <a
+                    href="https://facebook.com/nankwaase"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <Facebook className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/p/DROynUXja3h/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <Instagram className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://tiktok.com/@nankwase"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <TikTokIcon className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
                 </div>
-                <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span className="text-white">10:00 AM - 8:00 PM</span>
+              </div>
+
+              {/* Fresh & Fit Gym */}
+              <div className="mb-2">
+                <h4 className="text-white text-sm font-semibold mb-1">Fresh & Fit Gym</h4>
+                <div className="flex gap-3">
+                  <a
+                    href="https://facebook.com/freshandfitgh"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <Facebook className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/freshandfitgh/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <Instagram className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://tiktok.com/@freshandfitgh"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <TikTokIcon className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
                 </div>
-                <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span className="text-white">10:00 AM - 6:00 PM</span>
+              </div>
+
+              {/* Event Spaces */}
+              <div className="mb-2">
+                <h4 className="text-white text-sm font-semibold mb-1">Combos & Casa Event Space</h4>
+                <div className="flex gap-3">
+                  <a
+                    href="https://facebook.com/combosandcasa.events"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <Facebook className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/combosandcasa.events/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <Instagram className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
+                  <a
+                    href="https://tiktok.com/@combosandcasa"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/20 flex items-center justify-center transition-all group"
+                  >
+                    <TikTokIcon className="w-5 h-5 text-[#D4AF37] group-hover:scale-110 transition-transform" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -169,6 +286,12 @@ export default function Contact() {
           >
             <form onSubmit={handleSubmit} className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5">
               <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
+
+              {error && (
+                <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
+                  <p className="text-red-400 text-sm">{error}</p>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
@@ -201,7 +324,7 @@ export default function Contact() {
                   <Input
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="(+233) 0509251268"
                     className="bg-white/5 border-white/10 text-white"
                   />
                 </div>
@@ -213,13 +336,13 @@ export default function Contact() {
                     value={formData.section}
                     onValueChange={(value) => setFormData({ ...formData, section: value })}
                   >
-                    <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                    <SelectTrigger className="w-full bg-white/5 border-white/10 text-white">
                       <SelectValue placeholder="Select a section" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="restaurant">Restaurant & Bar</SelectItem>
-                      <SelectItem value="gym">Gym & Fitness</SelectItem>
-                      <SelectItem value="events">Event Spaces</SelectItem>
+                      <SelectItem value="restaurant">Nankwase Restaurant & Bar</SelectItem>
+                      <SelectItem value="gym">Fresh & Fit Gym</SelectItem>
+                      <SelectItem value="events">Combos & Casa Event Space</SelectItem>
                       <SelectItem value="general">General Enquiry</SelectItem>
                     </SelectContent>
                   </Select>
@@ -268,6 +391,52 @@ export default function Contact() {
             </form>
           </motion.div>
         </div>
+
+        {/* Business Hours - Full Width Below Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mt-8"
+        >
+          <div className="bg-[#1A1A1A] rounded-2xl p-8 border border-white/5">
+            <h3 className="text-2xl font-bold mb-6 text-center">Business Hours</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Nankwase Bar & Restaurant */}
+              <div className="text-center">
+                <h4 className="text-[#D4AF37] text-lg font-semibold mb-3">Nankwase Bar & Restaurant</h4>
+                <div className="space-y-2 text-white/60">
+                  <div>
+                    <p className="text-sm">Everyday (Mon-Sun)</p>
+                    <p className="text-white font-semibold">8:00 AM - 2:00 AM</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Fresh & Fit Gym */}
+              <div className="text-center border-x border-white/10">
+                <h4 className="text-[#D4AF37] text-lg font-semibold mb-3">Fresh & Fit Gym</h4>
+                <div className="space-y-2 text-white/60">
+                  <div>
+                    <p className="text-sm">Mon - Sat</p>
+                    <p className="text-white font-semibold">8:00 AM - 10:00 PM</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Event Space */}
+              <div className="text-center">
+                <h4 className="text-[#D4AF37] text-lg font-semibold mb-3">Event Space</h4>
+                <div className="space-y-2 text-white/60">
+                  <div>
+                    <p className="text-sm">Mon - Sat</p>
+                    <p className="text-white font-semibold">8:00 AM - 10:00 PM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

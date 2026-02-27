@@ -18,15 +18,38 @@ import BookingModal from "@/components/events/BookingModal";
 import Image from "next/image";
 import { EventSpaceProps } from "@/utils/types";
 import { toast } from "sonner";
+import type { ImageProps } from "next/image";
+
+// Image component with fallback
+interface ImageWithFallbackProps extends Omit<ImageProps, 'src'> {
+  src: string;
+  fallbackSrc?: string;
+}
+
+const ImageWithFallback = ({ src, fallbackSrc = "/event-space-2.jpg", alt, ...props }: ImageWithFallbackProps) => {
+  const [imgSrc, setImgSrc] = useState(src);
+
+  return (
+    <Image
+      {...props}
+      src={imgSrc}
+      alt={alt}
+      onError={() => {
+        if (imgSrc !== fallbackSrc) {
+          setImgSrc(fallbackSrc);
+        }
+      }}
+    />
+  );
+};
 
 const AboutCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
-    "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80",
-    "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80",
-    "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80",
-    "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=1200&q=80"
+    "/indoor-setting-2.jpg",
+    "/outdoor-space-day.jpg",
+    "/indoor-setting.jpg",
   ];
 
   const next = () => setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -49,6 +72,7 @@ const AboutCarousel = () => {
           key={currentIndex}
           src={images[currentIndex]}
           alt={`Event space ${currentIndex + 1}`}
+          loading={currentIndex === 0 ? "eager" : "lazy"}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -147,7 +171,7 @@ export default function Events() {
       <section className="relative py-20 md:py-32 px-6 lg:px-8 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=80')" }}
+          style={{ backgroundImage: "url('/event-space-2.jpg')" }}
         />
         <div className="absolute inset-0 bg-linear-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
         
@@ -269,12 +293,15 @@ export default function Events() {
               className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
               <div className="relative h-80">
-                <Image
-                  src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80"
+                <ImageWithFallback
+                  src="/outdoor-space-day.jpg"
+                  fallbackSrc="/event-space-2.jpg"
                   alt="Versatile spaces"
                   width={400}
                   height={400}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  priority
+                  style={{ width: '100%', height: 'auto' }}
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
@@ -297,12 +324,14 @@ export default function Events() {
               className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
               <div className="relative h-80">
-                <Image
-                  src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80"
+                <ImageWithFallback
+                  src="/event-space-with-couple.webp"
+                  fallbackSrc="/event-space-2.jpg"
                   alt="White-glove service"
                   width={400}
                   height={400}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{ width: '100%', height: 'auto' }}
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
@@ -325,12 +354,14 @@ export default function Events() {
               className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
               <div className="relative h-80">
-                <Image
-                  src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80"
+                <ImageWithFallback
+                  src="/indoor-cussions.jpeg"
+                  fallbackSrc="/event-space-2.jpg"
                   alt="Private suites"
                   width={400}
                   height={400}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{ width: '100%', height: 'auto' }}
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
@@ -353,12 +384,14 @@ export default function Events() {
               className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
               <div className="relative h-80">
-                <Image
-                  src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800&q=80"
+                <ImageWithFallback
+                  src="/indoor-space.jpg"
+                  fallbackSrc="/event-space-2.jpg"
                   alt="Luxury interiors"
                   width={400}
                   height={400}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{ width: '100%', height: 'auto' }}
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
@@ -381,12 +414,14 @@ export default function Events() {
               className="relative rounded-2xl overflow-hidden border border-white/5 group"
             >
               <div className="relative h-80">
-                <Image
-                  src="https://images.unsplash.com/photo-1478147427282-58a87a120781?w=800&q=80"
+                <ImageWithFallback
+                  src="/outdoor-space.JPG"
+                  fallbackSrc="/event-space-2.jpg"
                   alt="Infrastructure"
                   width={400}
                   height={400}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{ width: '100%', height: 'auto' }}
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-transparent" />
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
@@ -471,24 +506,28 @@ export default function Events() {
                       alt={space.name}
                       width={400}
                       height={400}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      priority={index === 0}
+                      style={{ width: '100%', height: 'auto' }}
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-[#1A1A1A] via-transparent to-transparent" />
                   </div>
                   <div className="p-8">
                     <div className="flex items-center justify-between">
                       <h3 className="text-2xl font-bold mb-2">{space.name}</h3>
-                      <div className="px-4 py-2 bg-[#D4AF37] text-black font-semibold rounded-full text-sm">
-                        {currency === 'GHS' ? '₵' : currency === 'NGN' ? '₦' : currency === 'ZAR' ? 'R' : '$'}
-                        {space.price}/hr
-                      </div>
+                      {space.price && (
+                        <div className="px-4 py-2 bg-[#D4AF37] text-black font-semibold rounded-full text-sm">
+                          {currency === 'GHS' ? '₵' : currency === 'NGN' ? '₦' : currency === 'ZAR' ? 'R' : '$'}
+                          {space.price}/hr
+                        </div>
+                      )}
                     </div>
                     <p className="text-[#D4AF37] mb-4">{space.capacity}</p>
                     {space.description && (
                       <p className="text-white/60 text-sm mb-6">{space.description}</p>
                     )}
                     <ul className="space-y-3">
-                      {space.features.slice(0, 4).map((feature, idx) => (
+                      {space.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center gap-3 text-white/70 text-sm">
                           <CheckCircle className="w-4 h-4 text-[#D4AF37] shrink-0" />
                           {feature}
@@ -534,6 +573,7 @@ export default function Events() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Full-Service <span className="text-[#D4AF37]">Event Planning</span>
             </h2>
+            <p className="text-white/50">From concept to execution, we handle every detail to ensure your event is flawless upon <span className="text-[#D4AF37]">request</span>.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -557,12 +597,13 @@ export default function Events() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6 lg:px-8">
+      <section className="py-20 px-6 lg:px-8 relative bg-[url('/event-space-1.jpg')] bg-cover bg-center overflow-hidden">
+        <div className="absolute inset-0 bg-black/70" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center bg-linear-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20 rounded-3xl p-12"
+          className="relative max-w-4xl mx-auto text-center bg-linear-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20 rounded-3xl p-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Create Magic?

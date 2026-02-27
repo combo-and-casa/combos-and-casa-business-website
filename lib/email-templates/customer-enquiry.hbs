@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enquiry Received - Combos & Casa</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0A0A0A; color: #ffffff;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #0A0A0A;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #1A1A1A; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: #000000; font-size: 32px; font-weight: bold; letter-spacing: -0.5px;">Combos & Casa</h1>
+              <p style="margin: 8px 0 0 0; color: #000000; font-size: 14px; opacity: 0.8;">{{businessUnit}}</p>
+            </td>
+          </tr>
+
+          <!-- Success Message -->
+          <tr>
+            <td style="padding: 40px 30px; text-align: center; background-color: #1A1A1A;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 48px;">✓</span>
+              </div>
+              <h2 style="margin: 0 0 12px 0; color: #ffffff; font-size: 28px; font-weight: bold;">Message Received!</h2>
+              <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 16px; line-height: 1.5;">
+                Thank you for contacting us, <strong style="color: #D4AF37;">{{customerName}}</strong>!
+              </p>
+            </td>
+          </tr>
+
+          <!-- Enquiry Details -->
+          <tr>
+            <td style="padding: 0 30px 30px 30px; background-color: #1A1A1A;">
+              <div style="background-color: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin: 0 0 16px 0; color: #D4AF37; font-size: 18px; font-weight: 600;">Your Enquiry</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Subject:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600;">{{subject}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Department:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; text-transform: capitalize;">{{businessUnit}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Reference:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; font-family: monospace;">#{{referenceNumber}}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Message Copy -->
+              <div style="background-color: rgba(255, 255, 255, 0.03); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin: 0 0 12px 0; color: #D4AF37; font-size: 16px; font-weight: 600;">Your Message:</h3>
+                <p style="margin: 0; color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; white-space: pre-wrap;">{{message}}</p>
+              </div>
+
+              <!-- Response Time -->
+              <div style="background-color: rgba(212, 175, 55, 0.05); border-left: 3px solid #D4AF37; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
+                <p style="margin: 0; color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6;">
+                  <strong style="color: #D4AF37;">Response Time:</strong><br>
+                  We aim to respond to all enquiries within 24-48 hours during business days. One of our team members will contact you soon.
+                </p>
+              </div>
+
+              <!-- Contact Info -->
+              <div style="text-align: center; padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="margin: 0 0 12px 0; color: rgba(255,255,255,0.6); font-size: 13px;">Need immediate assistance?</p>
+                <p style="margin: 0; color: #D4AF37; font-size: 16px; font-weight: 600;">+233 24 123 4567</p>
+                <p style="margin: 8px 0 0 0; color: rgba(255,255,255,0.6); font-size: 13px;">info@combosandcasagh.com</p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Social Media -->
+          <tr>
+            <td style="padding: 30px; background-color: rgba(212, 175, 55, 0.05); text-align: center;">
+              <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Connect with us</p>
+              <table role="presentation" style="margin: 0 auto;">
+                <tr>
+                  <td style="padding: 0 8px;">
+                    <a href="https://facebook.com/combosandcasa" style="display: inline-block; width: 40px; height: 40px; background-color: rgba(212, 175, 55, 0.2); border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; color: #D4AF37; font-weight: bold;">f</a>
+                  </td>
+                  <td style="padding: 0 8px;">
+                    <a href="https://instagram.com/combosandcasa" style="display: inline-block; width: 40px; height: 40px; background-color: rgba(212, 175, 55, 0.2); border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; color: #D4AF37; font-weight: bold;">📷</a>
+                  </td>
+                  <td style="padding: 0 8px;">
+                    <a href="https://twitter.com/combosandcasa" style="display: inline-block; width: 40px; height: 40px; background-color: rgba(212, 175, 55, 0.2); border-radius: 50%; text-align: center; line-height: 40px; text-decoration: none; color: #D4AF37; font-weight: bold;">𝕏</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 30px; background-color: #0F0F0F; text-align: center;">
+              <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.4); font-size: 12px;">
+                East Legon Hills, Accra, Ghana
+              </p>
+              <p style="margin: 0; color: rgba(255,255,255,0.4); font-size: 12px;">
+                © 2026 Combos & Casa. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

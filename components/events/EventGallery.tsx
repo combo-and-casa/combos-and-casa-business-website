@@ -4,17 +4,41 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import type { ImageProps } from "next/image";
+
+// Image component with fallback
+interface ImageWithFallbackProps extends Omit<ImageProps, 'src'> {
+  src: string;
+  fallbackSrc?: string;
+}
+
+const ImageWithFallback = ({ src, fallbackSrc = "/event-space-2.jpg", alt, ...props }: ImageWithFallbackProps) => {
+  const [imgSrc, setImgSrc] = useState(src);
+
+  return (
+    <Image
+      {...props}
+      src={imgSrc}
+      alt={alt}
+      onError={() => {
+        if (imgSrc !== fallbackSrc) {
+          setImgSrc(fallbackSrc);
+        }
+      }}
+    />
+  );
+};
 
 export default function EventGallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const images = [
-    "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80",
-    "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80",
-    "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80",
-    "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80",
-    "https://images.unsplash.com/photo-1505236858219-8359eb29e329?w=800&q=80",
-    "https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=800&q=80"
+    "/outdoor-space-day.jpg",
+    "/outdoor-space.JPG",
+    "/indoor-setting.jpg",
+    "/indoor-cussions.jpeg",
+    "/indoor-space.jpg",
+    "/indoor-setting-2.jpg",
   ];
 
   const nextImage = () => {
@@ -39,12 +63,14 @@ export default function EventGallery() {
             onClick={() => setSelectedImage(index)}
             className="relative h-64 rounded-2xl overflow-hidden cursor-pointer group"
           >
-            <Image
+            <ImageWithFallback
               src={image}
+              fallbackSrc="/event-space-2.jpg"
               alt={`Event space ${index + 1}`}
               width={400}
               height={256}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              style={{ width: '100%', height: 'auto' }}
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </motion.div>
@@ -87,12 +113,14 @@ export default function EventGallery() {
                 className="relative max-w-[90vw] max-h-[90vh]"
                 onClick={(e) => e.stopPropagation()}
               >
-                <Image
+                <ImageWithFallback
                   src={images[selectedImage]}
+                  fallbackSrc="/event-space-2.jpg"
                   alt="Selected event space"
                   width={1200}
                   height={800}
-                  className="max-w-full max-h-[90vh] object-contain"
+                  style={{ maxWidth: '100%', maxHeight: '90vh', height: 'auto' }}
+                  className="object-contain"
                 />
               </motion.div>
 

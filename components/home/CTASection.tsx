@@ -10,7 +10,7 @@ export default function CTASection() {
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1540541338287-41700207dee6?w=1920&q=80')"
+          backgroundImage: "url('https://combo-and-casa.github.io/images/event-space-with-logo.jpg')"
         }}
       />
       <div className="absolute inset-0 bg-black/80" />

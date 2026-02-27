@@ -10,6 +10,8 @@ import {
   PartyPopper,
   Dumbbell,
   Users,
+  MenuSquare,
+  CalendarCheck,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -25,7 +27,9 @@ import {
 const navItems = [
   { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/orders', label: 'Orders', icon: ShoppingBag },
+  { href: '/admin/menu', label: 'Menu Items', icon: MenuSquare },
   { href: '/admin/reservations', label: 'Reservations', icon: UtensilsCrossed },
+  { href: '/admin/upcoming-events', label: 'Upcoming Events', icon: CalendarCheck },
   { href: '/admin/event-spaces', label: 'Event Spaces', icon: PartyPopper },
   { href: '/admin/event-bookings', label: 'Event Bookings', icon: Calendar },
   { href: '/admin/fitness-plans', label: 'Fitness Plans', icon: Dumbbell },

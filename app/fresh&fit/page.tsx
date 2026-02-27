@@ -78,7 +78,7 @@ export default function FreshAndFit() {
       <section className="relative py-20 md:py-32 px-6 lg:px-8 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-20"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80')" }}
+          style={{ backgroundImage: "url('https://combo-and-casa.github.io/images/closeup-gym-equipment-2.jpg')" }}
         />
         <div className="absolute inset-0 bg-linear-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
         
@@ -129,7 +129,7 @@ export default function FreshAndFit() {
             className="inline-flex items-center gap-2 pb-8 text-white/50"
           >
             <Clock className="w-4 h-4" />
-            <span>Open 24/7 • 365 Days a Year</span>
+            <span>Open Mon-Fri • 5:00 AM - 10:00 PM</span>
           </motion.div>
 
           <motion.div
@@ -189,9 +189,10 @@ export default function FreshAndFit() {
               className="relative h-125 rounded-2xl overflow-hidden transition-transform duration-700 hover:scale-90"
             >
               <Image
-                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80"
-                alt="Gym interior"
-                className="w-full h-full object-cover"
+                src="https://combo-and-casa.github.io/images/lady-lifting-gym-equipment.jpg"
+                alt="Gym equipment"
+                style={{ width: '100%', height: 'auto' }}
+                className="object-cover"
                 width={560}
                 height={560}
               />
@@ -226,7 +227,8 @@ export default function FreshAndFit() {
                 <Image
                   src={feature.image}
                   alt={feature.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  style={{ width: '100%', height: 'auto' }}
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                   width={400}
                   height={256}
                 />
@@ -252,9 +254,10 @@ export default function FreshAndFit() {
               className="relative h-100 rounded-2xl overflow-hidden transition-transform duration-700 hover:scale-110"
             >
               <Image
-                src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&q=80"
-                alt="Rooftop bar"
-                className="w-full h-full object-cover"
+                src="/wellness-bar.jpg"
+                alt="wellness bar"
+                style={{ width: '100%', height: 'auto' }}
+                className="object-cover"
                 width={1200}
                 height={400}
               />
@@ -267,11 +270,11 @@ export default function FreshAndFit() {
               <div className="flex items-center gap-3 mb-4">
                 <Coffee className="w-8 h-8 text-[#D4AF37]" />
                 <h2 className="text-3xl md:text-4xl font-bold">
-                  Rooftop <span className="text-[#D4AF37]">Wellness Bar</span>
+                  Rooftop <span className="text-[#D4AF37]">Health Bar</span>
                 </h2>
               </div>
               <p className="text-white/70 text-lg leading-relaxed">
-                Fitness doesn&apos;t end at your last rep. Refuel at our rooftop terrace wellness bar, 
+                Fitness doesn&apos;t end at your last rep. Refuel at our rooftop terrace health bar, 
                 where fresh salads, sandwiches, and smoothies keep you on track with your health 
                 and nutrition goals.
               </p>
@@ -307,14 +310,14 @@ export default function FreshAndFit() {
               </p>
               <div className="flex items-center gap-3">
                 <Image
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80"
+                  src="/lady-by-fresh-and-fit-logo.jpeg"
                   alt="Member"
                   className="w-12 h-12 object-cover rounded-full border-2 border-[#D4AF37]"
                   width={48}
                   height={48}
                 />
                 <div>
-                  <p className="font-semibold">Kwame A.</p>
+                  <p className="font-semibold">Lady A.</p>
                   <p className="text-white/50 text-sm">Member</p>
                 </div>
               </div>
@@ -333,7 +336,7 @@ export default function FreshAndFit() {
               </p>
               <div className="flex items-center gap-3">
                 <Image
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80"
+                  src="/lady-training-the-legs.jpeg"
                   alt="Member"
                   className="w-12 h-12 object-cover rounded-full border-2 border-[#D4AF37]"
                   width={48}
@@ -359,7 +362,7 @@ export default function FreshAndFit() {
               </p>
               <div className="flex items-center gap-3">
                 <Image
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
+                  src="/ladies-on-bikes.jpeg"
                   alt="Member"
                   className="w-12 h-12 object-cover rounded-full border-2 border-[#D4AF37]"
                   width={48}
@@ -439,12 +442,13 @@ export default function FreshAndFit() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 lg:px-8">
+      <section className="py-20 px-6 lg:px-8 bg-[url('https://combo-and-casa.github.io/images/closeup-gym-equipment-2.jpg')] bg-cover bg-center relative">
+        <div className="absolute inset-0 bg-black/70" />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto text-center bg-linear-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20 rounded-3xl p-12"
+          className=" relative max-w-4xl mx-auto text-center bg-linear-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20 rounded-3xl p-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Ready to Elevate Your Fitness?

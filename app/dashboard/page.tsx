@@ -50,6 +50,14 @@ export default function Dashboard() {
           return;
         }
 
+        // Check if user is admin - redirect to admin dashboard
+        const { data: isAdminData, error: adminError } = await supabase.rpc('is_admin');
+        
+        if (!adminError && isAdminData === true) {
+          router.push('/admin');
+          return;
+        }
+
         // Set user data from auth metadata
         setUser({
           full_name: authUser.user_metadata?.full_name || authUser.email?.split('@')[0] || 'User',

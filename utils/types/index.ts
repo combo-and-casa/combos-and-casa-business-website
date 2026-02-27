@@ -2,6 +2,7 @@
 export interface NavItemsProps {
     pageName: string;
     pathname: string;
+    image?: string;
 }
 
 export interface ServiceCardProps {

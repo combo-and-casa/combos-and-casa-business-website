@@ -26,14 +26,17 @@ export default function HeroSection() {
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Video/Image */}
+      {/* Background Video */}
       <div className="absolute inset-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80')"
-          }}
-        />
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/combos-and-casa-video-2.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-[#0A0A0A]" />
       </div>
 
@@ -107,10 +110,10 @@ export default function HeroSection() {
             Explore Our World
             <ChevronDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
           </button>
-          <button className="px-8 py-4 border border-white/20 rounded-full hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300 flex items-center gap-2">
+          {/* <button className="px-8 py-4 border border-white/20 rounded-full hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300 flex items-center gap-2">
             <Play className="w-4 h-4" />
             Watch Video
-          </button>
+          </button> */}
         </motion.div>
       </div>
 

@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar, Users, Clock, Loader2, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { supabase } from "@/lib/supabase/client";
+import { toast } from "sonner";
 // import Image from "next/image";
 
 interface EventType {
@@ -15,7 +17,10 @@ interface EventType {
 }
 
 interface BookingFormProps {
-  user?: { full_name?: string } | null;
+  user?: { 
+    full_name?: string;
+    email?: string;
+  } | null;
 }
 
 interface FormData {
@@ -52,15 +57,95 @@ export default function BookingForm({ user }: BookingFormProps) {
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    toast.loading('Submitting your booking request...');
 
-    setIsSubmitting(true);
+    try {
+      // Validate required fields
+      if (!formData.event_type || !formData.event_date || !formData.start_time || !formData.end_time || 
+          !formData.guest_count || !formData.contact_name || !formData.contact_phone) {
+        toast.dismiss();
+        toast.error('Please fill in all required fields');
+        setIsSubmitting(false);
+        return;
+      }
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+      // Get contact email from user or require it in form
+      const contactEmail = user?.email || '';
+      if (!contactEmail) {
+        toast.dismiss();
+        toast.error('Please sign in to submit a booking');
+        setIsSubmitting(false);
+        return;
+      }
 
-    setIsSubmitting(false);
-    setSuccess(true);
+      // Save booking to database
+      const { data: bookingInsert, error: bookingError } = await supabase
+        .from('event_bookings')
+        .insert({
+          event_type: formData.event_type,
+          event_date: formData.event_date,
+          start_time: formData.start_time,
+          end_time: formData.end_time,
+          guest_count: parseInt(formData.guest_count),
+          contact_name: formData.contact_name,
+          contact_email: contactEmail,
+          contact_phone: formData.contact_phone,
+          special_requests: formData.special_requests || null,
+          status: 'pending'
+        })
+        .select()
+        .single();
+
+      if (bookingError) {
+        console.error('Error saving booking:', bookingError);
+        toast.dismiss();
+        toast.error('Failed to submit booking. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
+
+      console.log('Booking saved:', bookingInsert);
+
+      // Send confirmation emails (non-blocking)
+      try {
+        const emailResponse = await fetch('/api/send-event-confirmation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            bookingId: bookingInsert.id,
+            contactName: formData.contact_name,
+            contactEmail: contactEmail,
+            contactPhone: formData.contact_phone,
+            eventType: formData.event_type,
+            eventDate: formData.event_date,
+            startTime: formData.start_time,
+            endTime: formData.end_time,
+            guestCount: formData.guest_count,
+            specialRequests: formData.special_requests,
+          }),
+        });
+
+        const emailResult = await emailResponse.json();
+        if (emailResult.success) {
+          console.log('✅ Confirmation emails sent');
+        } else {
+          console.warn('⚠️ Email sending failed, but booking is successful');
+        }
+      } catch (emailError) {
+        console.error('⚠️ Email error (booking still successful):', emailError);
+      }
+
+      toast.dismiss();
+      toast.success('Booking request submitted! Check your email for confirmation.');
+      setIsSubmitting(false);
+      setSuccess(true);
+
+    } catch (error) {
+      console.error('Booking submission error:', error);
+      toast.dismiss();
+      toast.error('An error occurred. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   if (success) {

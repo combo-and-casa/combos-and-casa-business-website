@@ -6,16 +6,17 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38bdf8?style=for-the-badge&logo=tailwind-css)
 ![Supabase](https://img.shields.io/badge/Supabase-green?style=for-the-badge&logo=supabase)
+![Handlebars](https://img.shields.io/badge/Handlebars-orange?style=for-the-badge&logo=handlebars)
 
-**Premium Fitness, Fine Dining & Event Space**
+**Premium Fitness, Fine Dining & Event Space Platform**
 
-[Live Demo](#) | [Documentation](#) | [Report Bug](#) | [Request Feature](#)
+[Live Demo](#) | [Documentation](./docs/) | [Handover Guide](./PROJECT-HANDOVER.md) | [Development Guide](./DEVELOPMENT-GUIDE.md)
 
 </div>
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
 - [About](#about)
 - [Features](#features)
@@ -23,70 +24,85 @@
 - [Getting Started](#getting-started)
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
+- [Email System](#email-system)
 - [Deployment](#deployment)
+- [Documentation](#documentation)
 - [Contributing](#contributing)
 - [License](#license)
 
 ---
 
-## About
+## 🎯 About
 
-**Combos & Casa** is a comprehensive business platform combining three premium lifestyle services:
+**Combos & Casa** is a comprehensive multi-business platform integrating three premium services under one unified web experience:
 
-- **🏃 Fresh & Fit Gym** - State-of-the-art fitness center with membership management
-- **🍽️ Nankwaase Bar & Restaurant** - Fine dining with online ordering and reservations
-- **🎉 Event Spaces** - Elegant venues for weddings, corporate events, and celebrations
+- **🏃 Fresh & Fit Gym** - Modern fitness center with membership management and Paystack payment integration
+- **🍽️ Nankwaase Bar & Restaurant** - Full-featured restaurant with online ordering, menu management, and table reservations
+- **🎉 Event Spaces** - Professional event venue booking system for weddings, corporate events, and celebrations
 
-Built with modern web technologies, this platform provides a seamless user experience across all services with integrated booking, ordering, and membership management systems.
+Built with Next.js 16 (App Router), TypeScript, and Supabase, this platform provides a seamless, production-ready solution for managing multiple business verticals with shared authentication, payments, and customer management.
 
 ---
 
-## Features
+## ✨ Features
 
-### Fresh & Fit Gym
-- Interactive membership plans with pricing
-- Membership purchase flow
-- User dashboard for tracking memberships
-- Responsive fitness content sections
+### 🏃 Fresh & Fit Gym
+- **Membership Plans** - Three tiers (Basic, Premium, VIP) with detailed pricing
+- **Paystack Integration** - Secure payment processing with real-time verification
+- **Membership Dashboard** - Track active memberships, start/end dates, and status
+- **Database Persistence** - All memberships saved to Supabase
+- **Email Notifications** - Automatic confirmation emails for new memberships
+- **Responsive Design** - Fully optimized for mobile and desktop
 
-### Nankwaase Bar & Restaurant
-- **Dynamic Menu System** - Browse categorized menu items (starters, mains, desserts, cocktails, wines)
-- **Shopping Cart** - Add items, adjust quantities, remove items
+### 🍽️ Nankwaase Bar & Restaurant
+- **Dynamic Menu System** - Categorized menu (starters, mains, desserts, cocktails, wines, mocktails)
+- **Shopping Cart** - Add/remove items, adjust quantities, persistent cart state
 - **Online Ordering** - Complete checkout with pickup/delivery options
-- **Table Reservations** - Book tables online with date/time selection
+- **Table Reservations** - Real-time booking with date/time selection and guest count
+- **Email Confirmations** - Customer and admin notifications for orders and reservations
 - **About Page** - Restaurant story, services, gallery, opening hours
+- **Menu Management** - Database-driven menu items with pricing and descriptions
 
-### Event Space
-- Event type selection (weddings, corporate, birthdays, private parties)
-- Real-time availability checking
-- Guest count and duration management
-- Special requests handling
-- Booking confirmation system
+### 🎉 Event Space
+- **Event Type Selection** - Weddings, corporate events, birthdays, private parties
+- **Booking System** - Complete booking flow with Supabase integration
+- **Real-time Availability** - Check date/time availability before booking
+- **Guest Management** - Handle guest counts and duration requirements
+- **Special Requests** - Custom notes and special requirements handling
+- **Email Notifications** - Confirmation emails for customers and admins
+- **Booking Dashboard** - View all bookings and their status
 
-### User Dashboard
-- Order history with status tracking
-- Active memberships management
-- Event bookings overview
-- User profile information
+### 👤 User Dashboard
+- **Order History** - Track all restaurant orders with status updates
+- **Active Memberships** - View gym membership details and renewal dates
+- **Event Bookings** - Manage all event space reservations
+- **Profile Management** - User information and preferences
+- **Authentication** - Secure Supabase auth with protected routes
 
-### Authentication (Supabase)
-- Secure user authentication
-- Server-side session management
-- Protected routes for authenticated users
+### 📧 Email System
+- **Handlebars Templates** - 8 professional email templates (customer + admin)
+- **Transactional Emails** - Orders, reservations, events, memberships
+- **SMTP Integration** - Nodemailer with configurable SMTP provider
+- **Non-blocking** - Email failures don't interrupt critical operations
+- **Template Customization** - Easy-to-edit HBS files for email content
+- **Gold Branding** - Professional design matching site theme
 
-### UI/UX
-- **Modern Design** - Dark theme with gold accents (#D4AF37)
-- **Smooth Animations** - Framer Motion for page transitions
+### 🎨 UI/UX
+- **Modern Dark Theme** - Elegant dark design with gold accents (#D4AF37)
+- **Smooth Animations** - Framer Motion for page transitions and interactions
 - **Fully Responsive** - Mobile-first design approach
-- **Accessibility** - WCAG compliant components
+- **Accessibility** - WCAG compliant shadcn/ui components
+- **Loading States** - Proper loading indicators throughout
+- **Error Handling** - User-friendly error messages with toast notifications
 
-### SEO & Performance
-- **Complete Metadata** - Open Graph, Twitter Cards
-- **Structured Data** - JSON-LD schemas for all business types
-- **Dynamic Sitemap** - Auto-generated XML sitemap
-- **PWA Support** - Installable web app
-- **Optimized Images** - Next.js Image component
-- **Fast Loading** - Server components where possible
+### 🔐 Security & SEO
+- **Environment Variables** - Proper secret management (see [SECURITY-GUIDE.md](docs/SECURITY-GUIDE.md))
+- **Row Level Security** - Supabase RLS for data protection
+- **Server-side Processing** - Sensitive operations in API routes
+- **Complete Metadata** - Open Graph, Twitter Cards, JSON-LD schemas
+- **Dynamic Sitemap** - Auto-generated XML sitemap at `/sitemap.xml`
+- **PWA Support** - Installable progressive web app
+- **Structured Data** - Rich snippets for search engines
 
 ---
 
@@ -104,9 +120,23 @@ Built with modern web technologies, this platform provides a seamless user exper
 
 ### Backend & Database
 - **[Supabase](https://supabase.com/)** - Backend as a Service
-  - Authentication
   - PostgreSQL database
   - Row Level Security (RLS)
+  - Server-side authentication
+  - Real-time capabilities
+
+### Payments
+- **[Paystack](https://paystack.com/)** - Payment processing
+  - Secure payment gateway
+  - Verification API
+  - Production-ready integration
+
+### Email System
+- **[Nodemailer](https://nodemailer.com/)** - SMTP email sending
+- **[Handlebars](https://handlebarsjs.com/)** - Email template engine
+  - 8 professional templates
+  - Customer + admin notifications
+  - Gold-branded HTML emails
 
 ### UI Components
 - **[shadcn/ui](https://ui.shadcn.com/)** - Radix UI primitives
@@ -164,8 +194,8 @@ Built with modern web technologies, this platform provides a seamless user exper
    NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
    
    # Contact Information
-   NEXT_PUBLIC_CONTACT_EMAIL= your-contact-email 
-   NEXT_PUBLIC_CONTACT_PHONE= your-phone-number
+   NEXT_PUBLIC_CONTACT_EMAIL=contact@yourdomain.com
+   NEXT_PUBLIC_CONTACT_PHONE=+1-234-567-8900
    ```
 
 4. **Run the development server**
@@ -307,6 +337,50 @@ Custom utility classes:
 
 ---
 
+## 📧 Email System
+
+This project includes a complete transactional email system built with **Nodemailer** and **Handlebars templates**.
+
+### Setup
+```bash
+# Already installed
+npm install nodemailer @types/nodemailer handlebars @types/handlebars
+```
+
+### Configuration
+Add to `.env.local`:
+```env
+# SMTP Configuration (use your email provider)
+SMTP_HOST=mail.yourdomain.com
+SMTP_PORT=587
+SMTP_USER=noreply@yourdomain.com
+SMTP_PASS=your_smtp_password_here
+SMTP_FROM=noreply@yourdomain.com
+ADMIN_EMAIL=admin@yourdomain.com
+```
+
+### Templates Available
+Located in `lib/email-templates/`:
+- ✅ Customer order confirmation
+- ✅ Admin order notification
+- ✅ Customer reservation confirmation
+- ✅ Admin reservation notification
+- ✅ Customer event booking confirmation
+- ✅ Admin event booking notification
+- ✅ Customer membership activation
+- ✅ Admin membership notification
+
+### Integration Points
+Emails are automatically sent when:
+- Restaurant order is placed
+- Table reservation is made
+- Event space is booked
+- Gym membership is purchased
+
+**📖 Full documentation:** [docs/EMAIL-SYSTEM-README.md](./docs/EMAIL-SYSTEM-README.md)
+
+---
+
 ## 🌐 Deployment
 
 ### Vercel (Recommended)
@@ -336,38 +410,149 @@ Make sure to set all required environment variables in your hosting platform:
 
 ---
 
-## 🗺️ Roadmap
+---
 
-- [ ] Payment integration (Stripe/Paystack)
-- [ ] Email notifications (Resend/SendGrid)
-- [ ] Admin dashboard
-- [ ] Real-time order tracking
-- [ ] Customer reviews & ratings
-- [ ] Loyalty program
+## 📚 Documentation
 
+Comprehensive documentation is available in the `/docs` folder:
 
-## License
+### Core Documentation
+- **[PROJECT-HANDOVER.md](./PROJECT-HANDOVER.md)** - Complete project handover guide with architecture, database schemas, and API documentation
+- **[DEVELOPMENT-GUIDE.md](./DEVELOPMENT-GUIDE.md)** - Developer setup guide and best practices
+
+### Feature Documentation
+- **[EMAIL-SYSTEM-README.md](./docs/EMAIL-SYSTEM-README.md)** - Email system implementation and customization
+- **[EMAIL-INTEGRATION-GUIDE.md](./docs/EMAIL-INTEGRATION-GUIDE.md)** - How to integrate emails into new features
+- **[SEO-CONFIGURATION.md](./docs/SEO-CONFIGURATION.md)** - SEO setup, metadata, and structured data
+
+### Security & Best Practices
+- **[SECURITY-GUIDE.md](./docs/SECURITY-GUIDE.md)** - Environment variables and secret management
+- **[SECURITY-CHECKLIST.md](./docs/SECURITY-CHECKLIST.md)** - Pre-deployment security checklist
+
+### Payment Integration
+- **[PAYSTACK-SERVER-EXAMPLE.ts](./docs/PAYSTACK-SERVER-EXAMPLE.ts)** - Server-side payment verification
+- **[PAYSTACK-CLIENT-EXAMPLE.txt](./docs/PAYSTACK-CLIENT-EXAMPLE.txt)** - Client-side payment integration
+
+### Database Schemas
+- **[FITNESS-SCHEMA.sql](./docs/FITNESS-SCHEMA.sql)** - Gym membership database schema
+- **[EVENT-BOOKINGS-SCHEMA.sql](./docs/EVENT-BOOKINGS-SCHEMA.sql)** - Event booking database schema
+
+---
+
+## 🤝 Contributing
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Author
+---
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/eunie-alswell)
-- Email: eunicealswelltech@gmail.com
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+### Development Workflow
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Make your changes
+4. Test thoroughly (run `npm run build` to check for errors)
+5. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+6. Push to the branch (`git push origin feature/AmazingFeature`)
+7. Open a Pull Request
+
+### Code Standards
+- **TypeScript:** Use strict typing, avoid `any`
+- **Components:** Follow the existing component structure
+- **Styling:** Use Tailwind CSS utilities
+- **Testing:** Test on multiple devices and browsers
+- **Documentation:** Update docs for any new features
+
+### Before Submitting
+- [ ] Code builds without errors (`npm run build`)
+- [ ] No TypeScript errors
+- [ ] Tested on mobile and desktop
+- [ ] Environment variables documented
+- [ ] Security best practices followed
+
+## 📋 Roadmap & Future Features
+
+### Planned Features
+- [ ] **Admin Dashboard** - Manage menu, orders, reservations, events, memberships
+- [ ] **Real-time Notifications** - Live order status updates
+- [ ] **Customer Reviews** - Rating system for restaurant and gym
+- [ ] **Loyalty Program** - Points and rewards system
+- [ ] **Analytics Dashboard** - Business insights and metrics
+- [ ] **Multi-language Support** - i18n implementation
+- [ ] **SMS Notifications** - Twilio integration
+- [ ] **Calendar Integration** - Google Calendar sync for events
+- [ ] **Inventory Management** - Stock tracking for restaurant
+
+### Completed Features
+- [x] Paystack payment integration
+- [x] Email notification system
+- [x] Restaurant online ordering
+- [x] Table reservations system
+- [x] Event booking system
+- [x] Gym membership management
+- [x] User dashboard
+- [x] SEO optimization
+- [x] PWA support
 
 ---
 
-## Acknowledgments
+## 📄 License
 
-- [Next.js](https://nextjs.org/) - The React Framework
-- [Vercel](https://vercel.com/) - Hosting platform
-- [Supabase](https://supabase.com/) - Backend infrastructure
-- [Tailwind CSS](https://tailwindcss.com/) - Styling framework
-- [shadcn/ui](https://ui.shadcn.com/) - UI components
-- [Lucide](https://lucide.dev/) - Icon library
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### MIT License Summary
+- ✅ Commercial use allowed
+- ✅ Modification allowed
+- ✅ Distribution allowed
+- ✅ Private use allowed
+- ℹ️ License and copyright notice required
+
+---
+
+## 👤 Author
+
+**Your Name**
+- GitHub: [@yourusername](https://github.com/yourusername)
+- Email: yourname@example.com
+- Portfolio: https://yourportfolio.com
+
+---
+
+## 🙏 Acknowledgments
+
+Special thanks to:
+- **[Next.js Team](https://nextjs.org/)** - The React Framework for Production
+- **[Vercel](https://vercel.com/)** - Hosting and deployment platform
+- **[Supabase](https://supabase.com/)** - Backend infrastructure and authentication
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[shadcn/ui](https://ui.shadcn.com/)** - Beautiful, accessible UI components
+- **[Paystack](https://paystack.com/)** - Payment processing infrastructure
+- **[Lucide](https://lucide.dev/)** - Icon library
+- **[Framer Motion](https://www.framer.com/motion/)** - Animation library
+- **[Handlebars](https://handlebarsjs.com/)** - Email template engine
+
+### Open Source Components Used
+- React 19
+- TypeScript 5
+- Radix UI primitives
+- date-fns
+- clsx & tailwind-merge
+- sonner (toast notifications)
+
+---
+
+## 🚀 Quick Start Guide
+
+For new developers joining the project:
+
+1. **Read the handover document:** [PROJECT-HANDOVER.md](./PROJECT-HANDOVER.md)
+2. **Set up your environment:** [DEVELOPMENT-GUIDE.md](./DEVELOPMENT-GUIDE.md)
+3. **Understand security:** [docs/SECURITY-GUIDE.md](./docs/SECURITY-GUIDE.md)
+4. **Start developing!**
 
 ---
 
@@ -375,6 +560,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **⭐ Star this repo if you find it useful!**
 
-Made with ❤️ using Next.js and TypeScript
+Built with ❤️ using Next.js 16, TypeScript, and modern web technologies
+
+[Report Bug](https://github.com/yourusername/combos-and-casa-business-website/issues) · [Request Feature](https://github.com/yourusername/combos-and-casa-business-website/issues) · [View Demo](#)
+
+---
+
+**Last Updated:** February 2026
 
 </div>

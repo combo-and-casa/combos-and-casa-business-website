@@ -7,6 +7,7 @@ import { ChevronDown, ShoppingBag, User, Menu, X } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useApp } from '@/lib/context/AppContext';
+import Image from 'next/image';
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -26,17 +27,29 @@ export default function Navbar() {
     
     const isHomepage = pathname === "/";
 
+    // Dynamic logo based on route
+    const getLogo = () => {
+        if (pathname?.startsWith('/nankwase-bar-and-restaurant')) {
+            return '/nankwase-logo.png';
+        } else if (pathname?.startsWith('/fresh&fit')) {
+            return '/Fresh-and-fit-logo.png';
+        } else if (pathname?.startsWith('/event-space')) {
+            return '/combos-and-casa-logo-2.png';
+        }
+        return '/combos-and-casa-logo-2.png'; // Default main logo
+    };
+
     const navItems: NavItemsProps[] = [
         // { pageName: "Home", pathname: "/" },
         // { pageName: "Restaurant", pathname: "/restaurant" },
-        { pageName: "Fresh & Fit", pathname: "/fresh&fit" },
-        { pageName: "Event Spaces", pathname: "/event-space" },
+        { pageName: "Fresh & Fit", pathname: "/fresh&fit", image: "/fresh-and-fit-logo.png" },
+        { pageName: "Event Spaces", pathname: "/event-space", image: "/combos-and-casa-logo-2.png" },
         { pageName: "Contact", pathname: "/contact" },
     ];
     const restaurantItems: NavItemsProps[] = [
-        { pageName: "About", pathname: "/nankwaase-bar-and-restaurant/about" },
-        { pageName: "Menu", pathname: "/nankwaase-bar-and-restaurant/menu" },
-        { pageName: "Reservations", pathname: "/nankwaase-bar-and-restaurant/reservations" },
+        { pageName: "About", pathname: "/nankwase-bar-and-restaurant/about" },
+        { pageName: "Menu", pathname: "/nankwase-bar-and-restaurant/menu" },
+        { pageName: "Reservations", pathname: "/nankwase-bar-and-restaurant/reservations" },
     ];
 
     return (
@@ -53,10 +66,21 @@ export default function Navbar() {
                     <div className="flex items-center justify-between h-20">
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-3">
-                            <div className="w-12 h-12 gradient-gold rounded-lg flex items-center justify-center">
-                                <span className="text-black font-bold text-xl">C&C</span>
-                            </div>
-                            <span className="text-xl font-semibold tracking-tight">COMBOS & CASA</span>
+                            <motion.div 
+                                key={getLogo()}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.3 }}
+                                className="rounded-lg flex items-center justify-center"
+                            >
+                                <Image 
+                                    src={getLogo()} 
+                                    alt="Logo" 
+                                    width={500} 
+                                    height={500} 
+                                    className="w-45 h-30 object-contain" 
+                                />
+                            </motion.div>
                         </Link>
 
                         {/* Desktop Nav */}
@@ -68,7 +92,7 @@ export default function Navbar() {
                                 onMouseLeave={() => setRestaurantDropdownOpen(false)}
                             >
                                 <button className="text-sm font-medium text-white/70 hover:text-white transition-colors duration-300 relative group flex items-center gap-1">
-                                    Nankwaase Bar & Restaurant
+                                    Nankwase Bar & Restaurant
                                     <ChevronDown className="w-4 h-4" />
                                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold group-hover:w-full transition-all duration-300" />
                                 </button>

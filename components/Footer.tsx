@@ -4,22 +4,61 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { navItems, restaurantItems } from "../utils/constents/index";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 
 export default function Footer() {
     const [restaurantDropdownOpen, setRestaurantDropdownOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Dynamic logo based on route
+    const getLogo = () => {
+        if (pathname?.startsWith('/nankwase-bar-and-restaurant')) {
+            return '/nankwase-logo.png';
+        } else if (pathname?.startsWith('/fresh&fit')) {
+            return '/Fresh-and-fit-logo.png';
+        } else if (pathname?.startsWith('/event-space')) {
+            return '/combos-and-casa-logo-2.png';
+        }
+        return '/combos-and-casa-logo-2.png'; // Default main logo
+    };
+
+    const getBusinessName = () => {
+        if (pathname?.startsWith('/nankwase-bar-and-restaurant')) {
+            return 'NANKWASE BAR & RESTAURANT';
+        } else if (pathname?.startsWith('/fresh&fit')) {
+            return 'FRESH & FIT';
+        } else if (pathname?.startsWith('/event-space')) {
+            return 'COMBOS & CASA EVENT SPACES';
+        }
+        return 'COMBOS & CASA';
+    };
 
     return (
         <footer className="bg-[#0A0A0A] border-t border-white/5 py-16">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div className="md:col-span-2">
-                    <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 gradient-gold rounded-lg flex items-center justify-center">
-                        <span className="text-black font-bold text-xl">C&C</span>
-                    </div>
-                    <span className="text-xl font-semibold">COMBOS & CASA</span>
-                    </div>
+                    <Link href="/" className="flex items-center gap-3 mb-4">
+                        <motion.div 
+                            key={getLogo()}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="w-40 h-30 rounded-lg flex items-center justify-center overflow-hidden"
+                        >
+                            <Image 
+                                src={getLogo()} 
+                                alt="Logo" 
+                                width={500} 
+                                height={500} 
+                                style={{ width: '100%', height: 'auto' }}
+                                className="object-contain" 
+                            />
+                        </motion.div>
+                        <span className="text-xl font-semibold text-gold">{getBusinessName()}</span>
+                    </Link>
                     <p className="text-white/50 max-w-md">
                     A premium lifestyle destination combining world-class dining, 
                     state-of-the-art fitness, and unforgettable events.
@@ -83,7 +122,8 @@ export default function Footer() {
                             info@combosandcasagh.com
                         </a>
                         <a href="tel:+233509251984" className="block text-gold hover:underline">
-                            +233 50 925 1984
+                            0509251268 - <span className="text-white/50">Nankwase</span><br/>
+                            0509252315 - <span className="text-white/50">fresh and fit</span>
                         </a>
                     </div>
                 </div>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Membership - Admin</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0A0A0A; color: #ffffff;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #0A0A0A;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #1A1A1A; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: #000000; font-size: 28px; font-weight: bold;">💪 NEW MEMBERSHIP</h1>
+              <p style="margin: 8px 0 0 0; color: #000000; font-size: 14px; opacity: 0.8;">Gym Admin Dashboard</p>
+            </td>
+          </tr>
+
+          <!-- Alert Box -->
+          <tr>
+            <td style="padding: 30px; background-color: #1A1A1A;">
+              <div style="background-color: rgba(212, 175, 55, 0.15); border-left: 4px solid #D4AF37; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+                <p style="margin: 0; color: #ffffff; font-size: 16px; font-weight: 600;">
+                  New member joined: {{planName}}!
+                </p>
+                <p style="margin: 8px 0 0 0; color: rgba(255,255,255,0.6); font-size: 14px;">
+                  Membership ID: <strong style="color: #D4AF37;">{{membershipNumber}}</strong>
+                </p>
+              </div>
+
+              <!-- Member Details -->
+              <h3 style="margin: 0 0 16px 0; color: #D4AF37; font-size: 18px; font-weight: 600;">Member Information</h3>
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; background-color: rgba(255,255,255,0.03); border-radius: 8px; padding: 16px;">
+                <tr>
+                  <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Name:</td>
+                  <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600;">{{customerName}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Email:</td>
+                  <td style="padding: 8px 0; color: #D4AF37; font-size: 14px; text-align: right;">
+                    <a href="mailto:{{customerEmail}}" style="color: #D4AF37; text-decoration: none;">{{customerEmail}}</a>
+                  </td>
+                </tr>
+                {{#if customerPhone}}
+                <tr>
+                  <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Phone:</td>
+                  <td style="padding: 8px 0; color: #D4AF37; font-size: 14px; text-align: right;">
+                    <a href="tel:{{customerPhone}}" style="color: #D4AF37; text-decoration: none;">{{customerPhone}}</a>
+                  </td>
+                </tr>
+                {{/if}}
+              </table>
+
+              <!-- Membership Details -->
+              <h3 style="margin: 0 0 16px 0; color: #D4AF37; font-size: 18px; font-weight: 600;">Membership Details</h3>
+              <div style="background-color: rgba(212, 175, 55, 0.1); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">Plan:</td>
+                    <td style="padding: 12px 0; color: #D4AF37; font-size: 16px; text-align: right; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1);">{{planName}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">Duration:</td>
+                    <td style="padding: 12px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600; text-transform: capitalize; border-bottom: 1px solid rgba(255,255,255,0.1);">{{duration}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">Start Date:</td>
+                    <td style="padding: 12px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.1);">{{startDate}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Expiry Date:</td>
+                    <td style="padding: 12px 0; color: #FF6464; font-size: 14px; text-align: right; font-weight: 700;">{{endDate}}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Payment Information -->
+              <h3 style="margin: 0 0 16px 0; color: #D4AF37; font-size: 18px; font-weight: 600;">Payment Information</h3>
+              <div style="background-color: rgba(0, 255, 100, 0.1); border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Amount Paid:</td>
+                    <td style="padding: 8px 0; color: #00FF64; font-size: 18px; text-align: right; font-weight: 700;">GH₵{{price}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Payment Method:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; text-transform: uppercase;">{{paymentMethod}}</td>
+                  </tr>
+                  {{#if paymentReference}}
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Reference:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 13px; text-align: right; font-family: monospace;">{{paymentReference}}</td>
+                  </tr>
+                  {{/if}}
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Status:</td>
+                    <td style="padding: 8px 0; color: #00FF64; font-size: 14px; text-align: right; font-weight: 600; text-transform: uppercase;">✓ PAID</td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Action Items -->
+              <div style="background-color: rgba(255,255,255,0.05); border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+                <h4 style="margin: 0 0 12px 0; color: #D4AF37; font-size: 16px; font-weight: 600;">⚡ Action Items:</h4>
+                <ul style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.8;">
+                  <li>Prepare member ID card</li>
+                  <li>Schedule fitness assessment</li>
+                  <li>Assign locker (if applicable)</li>
+                  <li>Add member to WhatsApp community</li>
+                  <li>Update member records in system</li>
+                  <li>Send welcome kit preparation alert to staff</li>
+                </ul>
+              </div>
+
+              <!-- Stats Banner -->
+              <div style="text-align: center; padding: 24px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(244, 208, 63, 0.1)); border-radius: 12px; border: 2px solid #D4AF37;">
+                <p style="margin: 0 0 8px 0; color: #D4AF37; font-size: 18px; font-weight: 700;">📊 Member Onboarding</p>
+                <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 14px;">
+                  Ensure all onboarding steps are completed
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 30px; background-color: #0F0F0F; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+              <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.4); font-size: 12px;">
+                Combos & Casa Admin Notification System
+              </p>
+              <p style="margin: 0; color: rgba(255,255,255,0.3); font-size: 11px;">
+                This email was sent to info@combosandcasagh.com
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

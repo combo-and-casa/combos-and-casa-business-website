@@ -139,7 +139,38 @@ export default function MembershipModal({ plan, onClose, onSuccess }: Membership
       }
 
       console.log('Membership created:', membership);
-      toast.success('Membership activated successfully!');
+
+      // Send confirmation emails (non-blocking)
+      try {
+        const emailResponse = await fetch('/api/send-membership-confirmation', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            membershipId: membership.id,
+            name: user.email?.split('@')[0] || 'Member',
+            email: user.email,
+            phone: user.phone || undefined,
+            planName: plan.name,
+            duration: plan.duration,
+            price: plan.price,
+            startDate: startDate.toISOString().split('T')[0],
+            endDate: endDate.toISOString().split('T')[0],
+            paymentMethod: paymentMethod,
+            paymentReference: reference.reference,
+          }),
+        });
+
+        const emailResult = await emailResponse.json();
+        if (emailResult.success) {
+          console.log('✅ Membership confirmation emails sent');
+        } else {
+          console.warn('⚠️ Email sending failed, but membership is active');
+        }
+      } catch (emailError) {
+        console.error('⚠️ Email error (membership still active):', emailError);
+      }
+
+      toast.success('Membership activated successfully! Check your email for details.');
       
       setStep("success");
       setIsProcessing(false);

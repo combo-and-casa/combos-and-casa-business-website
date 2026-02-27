@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation - Combos & Casa</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0A0A0A; color: #ffffff;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #0A0A0A;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #1A1A1A; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: #000000; font-size: 32px; font-weight: bold; letter-spacing: -0.5px;">Combos & Casa</h1>
+              <p style="margin: 8px 0 0 0; color: #000000; font-size: 14px; opacity: 0.8;">Nankwaase Bar & Restaurant</p>
+            </td>
+          </tr>
+
+          <!-- Success Message -->
+          <tr>
+            <td style="padding: 40px 30px; text-align: center; background-color: #1A1A1A;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 48px;">✓</span>
+              </div>
+              <h2 style="margin: 0 0 12px 0; color: #ffffff; font-size: 28px; font-weight: bold;">Order Confirmed!</h2>
+              <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 16px; line-height: 1.5;">
+                Thank you for your order, <strong style="color: #D4AF37;">{{customerName}}</strong>!
+              </p>
+            </td>
+          </tr>
+
+          <!-- Order Details -->
+          <tr>
+            <td style="padding: 0 30px 30px 30px; background-color: #1A1A1A;">
+              <div style="background-color: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin: 0 0 16px 0; color: #D4AF37; font-size: 18px; font-weight: 600;">Order Information</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Order Number:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600;">#{{orderNumber}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Order Type:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; text-transform: capitalize;">{{orderType}}</td>
+                  </tr>
+                  {{#if pickupTime}}
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Pickup Time:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right;">{{pickupTime}}</td>
+                  </tr>
+                  {{/if}}
+                  {{#if deliveryAddress}}
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Delivery Address:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right;">{{deliveryAddress}}</td>
+                  </tr>
+                  {{/if}}
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Payment Method:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; text-transform: uppercase;">{{paymentMethod}}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Order Items -->
+              <h3 style="margin: 0 0 16px 0; color: #ffffff; font-size: 18px; font-weight: 600;">Order Items</h3>
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+                {{#each items}}
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                  <td style="padding: 12px 0; color: #ffffff; font-size: 14px;">
+                    {{this.name}}
+                    <span style="color: rgba(255,255,255,0.4); font-size: 13px;"> × {{this.quantity}}</span>
+                  </td>
+                  <td style="padding: 12px 0; color: #D4AF37; font-size: 14px; text-align: right; font-weight: 600;">
+                    GH₵{{this.price}}
+                  </td>
+                </tr>
+                {{/each}}
+              </table>
+
+              <!-- Total -->
+              <div style="background-color: rgba(212, 175, 55, 0.15); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 4px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Subtotal:</td>
+                    <td style="padding: 4px 0; color: #ffffff; font-size: 14px; text-align: right;">GH₵{{subtotal}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 12px 0 4px 0; color: #D4AF37; font-size: 18px; font-weight: bold; border-top: 1px solid rgba(255,255,255,0.2);">Total:</td>
+                    <td style="padding: 12px 0 4px 0; color: #D4AF37; font-size: 18px; text-align: right; font-weight: bold; border-top: 1px solid rgba(255,255,255,0.2);">GH₵{{total}}</td>
+                  </tr>
+                </table>
+              </div>
+
+              {{#if deliveryNotes}}
+              <div style="background-color: rgba(255,255,255,0.05); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Special Instructions:</p>
+                <p style="margin: 8px 0 0 0; color: #ffffff; font-size: 14px; line-height: 1.5;">{{deliveryNotes}}</p>
+              </div>
+              {{/if}}
+            </td>
+          </tr>
+
+          <!-- Contact Info -->
+          <tr>
+            <td style="padding: 0 30px 40px 30px; background-color: #1A1A1A;">
+              <div style="text-align: center; padding: 24px; background-color: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                <p style="margin: 0 0 12px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Need help with your order?</p>
+                <p style="margin: 0; color: #ffffff; font-size: 16px; font-weight: 600;">
+                  📞 Call us: <span style="color: #D4AF37;">+233 XX XXX XXXX</span>
+                </p>
+                <p style="margin: 8px 0 0 0; color: #ffffff; font-size: 16px; font-weight: 600;">
+                  📧 Email: <span style="color: #D4AF37;">info@combosandcasagh.com</span>
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 30px; background-color: #0F0F0F; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+              <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.4); font-size: 12px;">
+                © 2026 Combos & Casa. All rights reserved.
+              </p>
+              <p style="margin: 0; color: rgba(255,255,255,0.3); font-size: 11px;">
+                Nankwaase Bar & Restaurant | Fresh & Fit Gym | Grand Event Space
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

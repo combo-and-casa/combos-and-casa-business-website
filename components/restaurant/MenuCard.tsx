@@ -40,7 +40,8 @@ export default function MenuCard({ item, onAddToCart }: MenuCardProps) {
             alt={item.name}
             width={400}
             height={192}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            style={{ width: '100%', height: 'auto' }}
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-linear-to-t from-[#1A1A1A] to-transparent opacity-60" />
         </div>

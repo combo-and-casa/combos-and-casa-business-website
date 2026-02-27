@@ -263,7 +263,7 @@ export default function BookingModal({ onClose, onSuccess, spaces }: BookingModa
           ) : (
             <>
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold">Book Your Event</h3>
+                <h3 className="text-2xl font-bold text-gold">Book Your Event</h3>
                 <button
                   onClick={onClose}
                   className="p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -438,14 +438,14 @@ export default function BookingModal({ onClose, onSuccess, spaces }: BookingModa
                       </Label>
                     </div>
                     <div className="flex items-center gap-4 p-4 rounded-lg border border-white/10 bg-white/5">
-                      <RadioGroupItem value="momo" id="momo" />
+                      <RadioGroupItem value="momo" id="momo" disabled />
                       <Label htmlFor="momo" className="flex-1 cursor-pointer flex items-center gap-2">
                         <CreditCard className="w-4 h-4 text-white/40" />
                         Mobile Money
                       </Label>
                     </div>
                     <div className="flex items-center gap-4 p-4 rounded-lg border border-white/10 bg-white/5">
-                      <RadioGroupItem value="card" id="card" />
+                      <RadioGroupItem value="card" id="card" disabled />
                       <Label htmlFor="card" className="flex-1 cursor-pointer flex items-center gap-2">
                         <CreditCard className="w-4 h-4 text-white/40" />
                         Debit/Credit Card
@@ -510,7 +510,7 @@ export default function BookingModal({ onClose, onSuccess, spaces }: BookingModa
                 )}
 
                 <p className="text-center text-white/40 text-xs">
-                  {requiresPayment ? 'Secure payment powered by PayStack' : 'No payment required now'}
+                  {requiresPayment ? 'Secure payment powered by PayStack' : 'No payment required now, Call or Send Enquiry email for Space Price and Payment details.'}
                 </p>
               </div>
             </>

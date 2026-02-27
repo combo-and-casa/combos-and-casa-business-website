@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Order Notification - Admin</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0A0A0A; color: #ffffff;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #0A0A0A;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #1A1A1A; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: #000000; font-size: 28px; font-weight: bold;">🔔 NEW ORDER RECEIVED</h1>
+              <p style="margin: 8px 0 0 0; color: #000000; font-size: 14px; opacity: 0.8;">Restaurant Admin Dashboard</p>
+            </td>
+          </tr>
+
+          <!-- Alert Box -->
+          <tr>
+            <td style="padding: 30px; background-color: #1A1A1A;">
+              <div style="background-color: rgba(212, 175, 55, 0.15); border-left: 4px solid #D4AF37; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+                <p style="margin: 0; color: #ffffff; font-size: 16px; font-weight: 600;">
+                  Order #{{orderNumber}} needs your attention!
+                </p>
+                <p style="margin: 8px 0 0 0; color: rgba(255,255,255,0.6); font-size: 14px;">
+                  Order Type: <strong style="color: #D4AF37; text-transform: capitalize;">{{orderType}}</strong>
+                </p>
+              </div>
+
+              <!-- Customer Details -->
+              <h3 style="margin: 0 0 16px 0; color: #D4AF37; font-size: 18px; font-weight: 600;">Customer Information</h3>
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; background-color: rgba(255,255,255,0.03); border-radius: 8px; padding: 16px;">
+                <tr>
+                  <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Name:</td>
+                  <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600;">{{customerName}}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Email:</td>
+                  <td style="padding: 8px 0; color: #D4AF37; font-size: 14px; text-align: right;">
+                    <a href="mailto:{{customerEmail}}" style="color: #D4AF37; text-decoration: none;">{{customerEmail}}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Phone:</td>
+                  <td style="padding: 8px 0; color: #D4AF37; font-size: 14px; text-align: right;">
+                    <a href="tel:{{customerPhone}}" style="color: #D4AF37; text-decoration: none;">{{customerPhone}}</a>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Order Details -->
+              <h3 style="margin: 0 0 16px 0; color: #D4AF37; font-size: 18px; font-weight: 600;">Order Details</h3>
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+                {{#if pickupTime}}
+                <tr>
+                  <td colspan="2" style="padding: 12px; background-color: rgba(212, 175, 55, 0.1); border-radius: 8px; margin-bottom: 8px;">
+                    <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Pickup Time</p>
+                    <p style="margin: 4px 0 0 0; color: #ffffff; font-size: 16px; font-weight: 600;">{{pickupTime}}</p>
+                  </td>
+                </tr>
+                {{/if}}
+                {{#if deliveryAddress}}
+                <tr>
+                  <td colspan="2" style="padding: 12px; background-color: rgba(212, 175, 55, 0.1); border-radius: 8px; margin-bottom: 8px;">
+                    <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Delivery Address</p>
+                    <p style="margin: 4px 0 0 0; color: #ffffff; font-size: 16px; font-weight: 600;">{{deliveryAddress}}</p>
+                  </td>
+                </tr>
+                {{/if}}
+              </table>
+
+              <!-- Order Items -->
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; background-color: rgba(255,255,255,0.03); border-radius: 8px; overflow: hidden;">
+                <thead>
+                  <tr style="background-color: rgba(212, 175, 55, 0.2);">
+                    <th style="padding: 12px; text-align: left; color: #D4AF37; font-size: 13px; font-weight: 600; text-transform: uppercase;">Item</th>
+                    <th style="padding: 12px; text-align: center; color: #D4AF37; font-size: 13px; font-weight: 600; text-transform: uppercase;">Qty</th>
+                    <th style="padding: 12px; text-align: right; color: #D4AF37; font-size: 13px; font-weight: 600; text-transform: uppercase;">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each items}}
+                  <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 12px; color: #ffffff; font-size: 14px;">{{this.name}}</td>
+                    <td style="padding: 12px; color: rgba(255,255,255,0.8); font-size: 14px; text-align: center; font-weight: 600;">{{this.quantity}}</td>
+                    <td style="padding: 12px; color: #D4AF37; font-size: 14px; text-align: right; font-weight: 600;">GH₵{{this.price}}</td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+
+              <!-- Total -->
+              <div style="background-color: rgba(212, 175, 55, 0.2); border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 4px 0; color: #D4AF37; font-size: 20px; font-weight: bold;">ORDER TOTAL:</td>
+                    <td style="padding: 4px 0; color: #D4AF37; font-size: 24px; text-align: right; font-weight: bold;">GH₵{{total}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="padding: 8px 0 0 0; color: rgba(255,255,255,0.6); font-size: 13px; text-align: right; text-transform: uppercase;">
+                      Payment: {{paymentMethod}}
+                      {{#if paymentReference}}
+                      <br/>Ref: {{paymentReference}}
+                      {{/if}}
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              {{#if deliveryNotes}}
+              <div style="background-color: rgba(255, 100, 100, 0.1); border-left: 4px solid #FF6464; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                <p style="margin: 0 0 8px 0; color: #FF6464; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">⚠️ Special Instructions:</p>
+                <p style="margin: 0; color: #ffffff; font-size: 14px; line-height: 1.5;">{{deliveryNotes}}</p>
+              </div>
+              {{/if}}
+
+              <!-- Action Required -->
+              <div style="text-align: center; padding: 24px; background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(244, 208, 63, 0.1)); border-radius: 12px; border: 2px solid #D4AF37;">
+                <p style="margin: 0 0 12px 0; color: #ffffff; font-size: 16px; font-weight: 600;">⏱️ Action Required</p>
+                <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 14px;">
+                  Please prepare this order and update the status in the admin dashboard.
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 30px; background-color: #0F0F0F; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+              <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.4); font-size: 12px;">
+                Combos & Casa Admin Notification System
+              </p>
+              <p style="margin: 0; color: rgba(255,255,255,0.3); font-size: 11px;">
+                This email was sent to info@combosandcasagh.com
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

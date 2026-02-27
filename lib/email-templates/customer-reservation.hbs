@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation Confirmed - Combos & Casa</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0A0A0A; color: #ffffff;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #0A0A0A;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <table role="presentation" style="max-width: 600px; width: 100%; border-collapse: collapse; background-color: #1A1A1A; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: #000000; font-size: 32px; font-weight: bold; letter-spacing: -0.5px;">Combos & Casa</h1>
+              <p style="margin: 8px 0 0 0; color: #000000; font-size: 14px; opacity: 0.8;">Nankwaase Bar & Restaurant</p>
+            </td>
+          </tr>
+
+          <!-- Success Message -->
+          <tr>
+            <td style="padding: 40px 30px; text-align: center; background-color: #1A1A1A;">
+              <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 48px;">🍽️</span>
+              </div>
+              <h2 style="margin: 0 0 12px 0; color: #ffffff; font-size: 28px; font-weight: bold;">Table Reserved!</h2>
+              <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 16px; line-height: 1.5;">
+                Your reservation is confirmed, <strong style="color: #D4AF37;">{{customerName}}</strong>!
+              </p>
+            </td>
+          </tr>
+
+          <!-- Reservation Details -->
+          <tr>
+            <td style="padding: 0 30px 30px 30px; background-color: #1A1A1A;">
+              <div style="background-color: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 24px; margin-bottom: 24px;">
+                <h3 style="margin: 0 0 16px 0; color: #D4AF37; font-size: 18px; font-weight: 600;">Reservation Details</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Confirmation Number:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600;">#{{reservationNumber}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Date:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600;">{{date}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Time:</td>
+                    <td style="padding: 8px 0; color: #ffffff; font-size: 14px; text-align: right; font-weight: 600;">{{time}}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Number of Guests:</td>
+                    <td style="padding: 8px 0; color: #D4AF37; font-size: 16px; text-align: right; font-weight: 700;">{{guests}} {{#if (eq guests 1)}}Guest{{else}}Guests{{/if}}</td>
+                  </tr>
+                </table>
+              </div>
+
+              {{#if specialRequests}}
+              <div style="background-color: rgba(255,255,255,0.05); border-radius: 8px; padding: 16px; margin-bottom: 24px;">
+                <p style="margin: 0; color: rgba(255,255,255,0.6); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Special Requests:</p>
+                <p style="margin: 8px 0 0 0; color: #ffffff; font-size: 14px; line-height: 1.5;">{{specialRequests}}</p>
+              </div>
+              {{/if}}
+
+              <!-- Important Information -->
+              <div style="background-color: rgba(212, 175, 55, 0.1); border-left: 4px solid #D4AF37; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
+                <h4 style="margin: 0 0 12px 0; color: #D4AF37; font-size: 16px; font-weight: 600;">Important Information</h4>
+                <ul style="margin: 0; padding-left: 20px; color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.8;">
+                  <li>Please arrive 10 minutes before your reservation time</li>
+                  <li>We'll hold your table for 15 minutes past reservation time</li>
+                  <li>For parties of 8 or more, please call us directly</li>
+                  <li>Dress code: Smart casual</li>
+                </ul>
+              </div>
+
+              <!-- Contact Info -->
+              <div style="text-align: center; padding: 24px; background-color: rgba(255,255,255,0.03); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                <p style="margin: 0 0 12px 0; color: rgba(255,255,255,0.6); font-size: 14px;">Need to modify your reservation?</p>
+                <p style="margin: 0; color: #ffffff; font-size: 16px; font-weight: 600;">
+                  📞 Call us: <span style="color: #D4AF37;">+233 XX XXX XXXX</span>
+                </p>
+                <p style="margin: 8px 0 0 0; color: #ffffff; font-size: 16px; font-weight: 600;">
+                  📧 Email: <span style="color: #D4AF37;">info@combosandcasagh.com</span>
+                </p>
+              </div>
+            </td>
+          </tr>
+
+          <!-- CTA Button -->
+          <tr>
+            <td style="padding: 0 30px 40px 30px; background-color: #1A1A1A; text-align: center;">
+              <a href="https://combosandcasagh.com/nankwaase-bar-and-restaurant" style="display: inline-block; padding: 16px 32px; background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%); color: #000000; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 8px;">
+                View Menu
+              </a>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 30px; background-color: #0F0F0F; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+              <p style="margin: 0 0 8px 0; color: rgba(255,255,255,0.4); font-size: 12px;">
+                We look forward to serving you!
+              </p>
+              <p style="margin: 0; color: rgba(255,255,255,0.3); font-size: 11px;">
+                © 2026 Combos & Casa. All rights reserved.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
