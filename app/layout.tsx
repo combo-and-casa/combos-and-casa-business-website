@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import GlobalLoading from "@/components/GlobalLoading";
 import StructuredData from "@/components/StructuredData";
 import { organizationSchema } from "@/lib/structured-data";
 import { AppProvider } from "@/lib/context/AppContext";
@@ -120,6 +121,7 @@ export default async function RootLayout({
         className={`min-h-screen bg-[#0A0A0A] text-white ${inter.variable} ${poppins.variable} antialiased`}
         suppressHydrationWarning
       >
+        <GlobalLoading />
         <AppProvider>
           <TooltipProvider>
             {!isAdminRoute && <Navbar />}
