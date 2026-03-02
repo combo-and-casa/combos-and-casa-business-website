@@ -15,7 +15,7 @@ export default function Footer() {
     // Dynamic logo based on route
     const getLogo = () => {
         if (pathname?.startsWith('/nankwase-bar-and-restaurant')) {
-            return '/nankwase-logo.png';
+            return '/nankwase-white.png';
         } else if (pathname?.startsWith('/fresh&fit')) {
             return '/Fresh-and-fit-logo.png';
         } else if (pathname?.startsWith('/event-space')) {
@@ -123,7 +123,7 @@ export default function Footer() {
                         </a>
                         <a href="tel:+233509251984" className="block text-gold hover:underline">
                             0509251268 - <span className="text-white/50">Nankwase</span><br/>
-                            0509252315 - <span className="text-white/50">fresh and fit</span>
+                            0509252315 - <span className="text-white/50">Fresh and Fit</span>
                         </a>
                     </div>
                 </div>

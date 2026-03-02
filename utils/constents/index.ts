@@ -24,7 +24,7 @@ export const navItems: NavItemsProps[] = [
         // { pageName: "Home", pathname: "/" },
         // { pageName: "Restaurant", pathname: "/restaurant" },
         { pageName: "Fresh & Fit", pathname: "/fresh&fit" },
-        { pageName: "Event Spaces", pathname: "/event-space" },
+        { pageName: "Combos & Casa Event Spaces", pathname: "/event-space" },
         { pageName: "Contact", pathname: "/contact" },
     ];
 
@@ -56,7 +56,7 @@ export const services: ServiceCardProps[] = [
             index: 1
         },
         {
-            title: "Event Spaces",
+            title: "Combos & Casa Event Spaces",
             subtitle: "Unforgettable Moments",
             description: "From intimate gatherings to grand celebrations, our versatile event spaces provide the perfect backdrop for your special occasions.",
             image: "/event-space-with-couple.webp",
@@ -180,7 +180,7 @@ export const restaurantServices: Service[] = [
       icon: Wine,
       title: "Premium Bar",
       description: "Curated wine list and craft cocktails by expert mixologists. Our bar features an extensive collection of fine wines and signature cocktails that perfectly complement your dining experience.",
-      image: "/bar-mockup-2.jpg"
+      image: "/bar.jpeg"
     },
     {
       icon: UtensilsCrossed,

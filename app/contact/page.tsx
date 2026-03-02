@@ -426,7 +426,7 @@ export default function Contact() {
 
               {/* Event Space */}
               <div className="text-center">
-                <h4 className="text-[#D4AF37] text-lg font-semibold mb-3">Event Space</h4>
+                <h4 className="text-[#D4AF37] text-lg font-semibold mb-3">Combos & Casa Event Spaces</h4>
                 <div className="space-y-2 text-white/60">
                   <div>
                     <p className="text-sm">Mon - Sat</p>

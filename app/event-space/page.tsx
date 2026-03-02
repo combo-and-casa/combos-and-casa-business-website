@@ -221,7 +221,7 @@ export default function Events() {
             className="px-8 py-4 gradient-gold text-black font-semibold rounded-full hover:scale-105 transition-transform flex items-center gap-2 mx-auto"
           >
             <Calendar className="w-5 h-5" />
-            Book Your Event
+            Book Your Event Space
           </motion.button>
         </div>
       </section>
@@ -233,6 +233,7 @@ export default function Events() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5, ease:"easeInOut" }}
             className="text-center mb-12"
           >
             <span className="inline-block px-4 py-2 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-sm font-medium tracking-wider mb-4">
