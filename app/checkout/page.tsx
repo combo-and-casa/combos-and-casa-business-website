@@ -65,7 +65,7 @@ export default function Checkout() {
   useEffect(() => {
     // Redirect to menu if cart is empty
     if (cart.length === 0) {
-      router.push("/nankwaase-bar-and-restaurant/menu");
+      router.push("/nankwase-bar-and-restaurant/menu");
     }
   }, [cart.length, router]);
 
@@ -268,7 +268,7 @@ export default function Checkout() {
               View My Orders
             </Link>
             <Link
-              href="/nankwaase-bar-and-restaurant/menu"
+              href="/nankwase-bar-and-restaurant/menu"
               className="py-4 border border-white/20 rounded-xl hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all text-center"
             >
               Order More
@@ -285,7 +285,7 @@ export default function Checkout() {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
           <Link
-            href="/nankwaase-bar-and-restaurant/menu"
+            href="/nankwase-bar-and-restaurant/menu"
             className="p-2 hover:bg-white/10 rounded-full transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />

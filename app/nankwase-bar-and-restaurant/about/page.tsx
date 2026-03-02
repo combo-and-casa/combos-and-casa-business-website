@@ -329,7 +329,7 @@ export default function RestaurantAbout() {
             Browse our menu and place your order for pickup or delivery
           </p>
           <Link
-            href="/nankwaase-bar-and-restaurant/menu"
+            href="/nankwase-bar-and-restaurant/menu"
             className="inline-flex items-center gap-2 px-8 py-4 linear-gold text-black gradient-gold font-semibold rounded-full hover:scale-105 transition-transform"
           >
             View Full Menu <ArrowRight className="w-5 h-5" />

@@ -52,7 +52,7 @@ export default function CTASection() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              href="/nankwaase-bar-and-restaurant/menu"
+              href="/nankwase-bar-and-restaurant/menu"
               className="px-8 py-4 border border-white/20 rounded-full hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all duration-300"
             >
               View Menu

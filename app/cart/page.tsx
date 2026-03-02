@@ -40,7 +40,7 @@ export default function Cart() {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
           <Link
-            href="/nankwaase-bar-and-restaurant/menu"
+            href="/nankwase-bar-and-restaurant/menu"
             className="p-2 hover:bg-white/10 rounded-full transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
@@ -56,7 +56,7 @@ export default function Cart() {
           >
             <p className="text-white/50 text-lg mb-6">Your cart is empty</p>
             <Link
-              href="/nankwaase-bar-and-restaurant/menu"
+              href="/nankwase-bar-and-restaurant/menu"
               className="inline-block px-6 py-3 gradient-gold text-black font-semibold rounded-full"
             >
               Browse Menu
