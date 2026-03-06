@@ -10,7 +10,7 @@ Disallow: /checkout
 # Allow important pages
 Allow: /
 Allow: /fresh&fit
-Allow: /nankwaase-bar-and-restaurant
+Allow: /nankwase-bar-and-restaurant
 Allow: /event-space
 
 # Sitemap location
