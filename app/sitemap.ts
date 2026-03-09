@@ -1,53 +1,55 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
   const routes = [
     {
-      url: baseUrl,
+      url: `https://www.combosandcasagh.com/`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/fresh&fit`,
+      url: `https://www.combosandcasagh.com/fresh&fit`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/nankwase-bar-and-restaurant`,
+      url: `https://www.combosandcasagh.com/nankwase-bar-and-restaurant`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/nankwase-bar-and-restaurant/menu`,
+      url: `https://www.combosandcasagh.com/nankwase-bar-and-restaurant/menu`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/nankwase-bar-and-restaurant/about`,
+      url: `https://www.combosandcasagh.com/nankwase-bar-and-restaurant/about`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/nankwase-bar-and-restaurant/reservations`,
+      url: `https://www.combosandcasagh.com/nankwase-bar-and-restaurant/reservations`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/event-space`,
+      url: `https://www.combosandcasagh.com/event-space`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/contact`,
+      url: `https://www.combosandcasagh.com/contact`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
