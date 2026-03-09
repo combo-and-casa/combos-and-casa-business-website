@@ -16,7 +16,7 @@ export default function Footer() {
     const getLogo = () => {
         if (pathname?.startsWith('/nankwase-bar-and-restaurant')) {
             return '/nankwase-white.png';
-        } else if (pathname?.startsWith('/fresh&fit')) {
+        } else if (pathname?.startsWith('/fresh-and-fit')) {
             return '/Fresh-and-fit-logo.png';
         } else if (pathname?.startsWith('/event-space')) {
             return '/combos-and-casa-logo-2.png';
@@ -27,7 +27,7 @@ export default function Footer() {
     const getBusinessName = () => {
         if (pathname?.startsWith('/nankwase-bar-and-restaurant')) {
             return 'NANKWASE BAR & RESTAURANT';
-        } else if (pathname?.startsWith('/fresh&fit')) {
+        } else if (pathname?.startsWith('/fresh-and-fit')) {
             return 'FRESH & FIT';
         } else if (pathname?.startsWith('/event-space')) {
             return 'COMBOS & CASA EVENT SPACES';

@@ -31,7 +31,7 @@ export default function Navbar() {
     const getLogo = () => {
         if (pathname?.startsWith('/nankwase-bar-and-restaurant')) {
             return '/nankwase-white.png';
-        } else if (pathname?.startsWith('/fresh&fit')) {
+        } else if (pathname?.startsWith('/fresh-and-fit')) {
             return '/Fresh-and-fit-logo.png';
         } else if (pathname?.startsWith('/event-space')) {
             return '/combos-and-casa-logo-2.png';
@@ -42,7 +42,7 @@ export default function Navbar() {
     const navItems: NavItemsProps[] = [
         // { pageName: "Home", pathname: "/" },
         // { pageName: "Restaurant", pathname: "/restaurant" },
-        { pageName: "Fresh & Fit", pathname: "/fresh&fit", image: "/fresh-and-fit-logo.png" },
+        { pageName: "Fresh & Fit", pathname: "/fresh-and-fit", image: "/fresh-and-fit-logo.png" },
         { pageName: "Combos & Casa Event Spaces", pathname: "/event-space", image: "/combos-and-casa-logo-2.png" },
         { pageName: "Contact", pathname: "/contact" },
     ];

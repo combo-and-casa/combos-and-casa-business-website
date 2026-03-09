@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -7,13 +7,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     {
-      url: `https://www.combosandcasagh.com/`,
+      url: `https://www.combosandcasagh.com`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 1.0,
     },
     {
-      url: `https://www.combosandcasagh.com/fresh&fit`,
+      url: `https://www.combosandcasagh.com/fresh-and-fit`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.9,

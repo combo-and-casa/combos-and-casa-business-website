@@ -23,15 +23,15 @@ import {
 export const navItems: NavItemsProps[] = [
         // { pageName: "Home", pathname: "/" },
         // { pageName: "Restaurant", pathname: "/restaurant" },
-        { pageName: "Fresh & Fit", pathname: "/fresh&fit" },
+        { pageName: "Fresh & Fit", pathname: "/fresh-and-fit" },
         { pageName: "Combos & Casa Event Spaces", pathname: "/event-space" },
         { pageName: "Contact", pathname: "/contact" },
     ];
 
 export const restaurantItems: NavItemsProps[] = [
-        { pageName: "About", pathname: "/nankwaase-bar-and-restaurant/about" },
-        { pageName: "Menu", pathname: "/nankwaase-bar-and-restaurant/menu" },
-        { pageName: "Reservations", pathname: "/nankwaase-bar-and-restaurant/reservations" },
+        { pageName: "About", pathname: "/nankwase-bar-and-restaurant/about" },
+        { pageName: "Menu", pathname: "/nankwase-bar-and-restaurant/menu" },
+        { pageName: "Reservations", pathname: "/nankwase-bar-and-restaurant/reservations" },
     ];
 
 export const services: ServiceCardProps[] = [
@@ -51,7 +51,7 @@ export const services: ServiceCardProps[] = [
             description: "State-of-the-art equipment, expert trainers, and premium amenities to help you achieve your fitness goals in style.",
             image: "https://combo-and-casa.github.io/images/state-of-the-art_%E2%99%80.jpg",
             ctaText: "Join the Gym",
-            ctaLink: "/fresh&fit",
+            ctaLink: "/fresh-and-fit",
             icon: Dumbbell,
             index: 1
         },

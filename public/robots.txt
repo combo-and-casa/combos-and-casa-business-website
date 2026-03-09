@@ -14,4 +14,4 @@ Allow: /nankwase-bar-and-restaurant
 Allow: /event-space
 
 # Sitemap location
-Sitemap: ${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/sitemap.xml
+Sitemap: https://www.combosandcasagh.com/sitemap.xml
