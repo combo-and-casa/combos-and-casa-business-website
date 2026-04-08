@@ -45,7 +45,7 @@ export default function CTASection() {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/fresh&fit"
+              href="/fresh-and-fit"
               className="group px-8 py-4 gradient-gold text-black font-semibold rounded-full hover:scale-105 transition-all duration-300 flex items-center gap-2"
             >
               Become a Member
