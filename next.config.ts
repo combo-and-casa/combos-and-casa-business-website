@@ -27,7 +27,7 @@ const nextConfig: NextConfig = {
               "img-src 'self' data: https: blob:",
               "font-src 'self' data: https://fonts.gstatic.com",
               "connect-src 'self' https://api.paystack.co https://js.paystack.co https://*.supabase.co wss://*.supabase.co",
-              "frame-src 'self' https://js.paystack.co",
+              "frame-src 'self' https://js.paystack.co https://checkout.paystack.com https://*.paystack.com",
             ].join('; '),
           },
         ],
